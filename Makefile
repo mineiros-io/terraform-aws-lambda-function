@@ -52,14 +52,14 @@ test/pre-commit: DOCKER_FLAGS += ${DOCKER_SSH_FLAGS}
 test/pre-commit:
 	$(call docker-run,pre-commit run -a)
 
-## Run all Go tests inside a build-tools docker container. This is complementary to running 'go test ./test/...'.
+## Run go tests hooks in build-tools docker container.
 .PHONY: test/unit-tests
 test/unit-tests: DOCKER_FLAGS += ${DOCKER_SSH_FLAGS}
 test/unit-tests: DOCKER_FLAGS += ${DOCKER_AWS_FLAGS}
 test/unit-tests:
 	@echo "${YELLOW}No tests defined.${RESET}"
-	# @echo "${YELLOW}[TEST] ${GREEN}Start Running Go Tests in Docker Container.${RESET}"
-	# $(call go-test,./test/...)
+	@echo "${YELLOW}[TEST] ${GREEN}Start Running Go Tests in Docker Container.${RESET}"
+	$(call go-test,./test/...)
 
 ## Clean up cache and temporary files
 .PHONY: clean
