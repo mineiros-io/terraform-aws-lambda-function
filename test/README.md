@@ -63,11 +63,11 @@ Alternatively, you can also run the tests without Docker.
 <!-- References -->
 
 <!-- markdown-link-check-disable -->
-[Makefile]: https://github.com/mineiros-io/terraform-module-template/blob/master/Makefile
-[Testdirectory]: https://github.com/mineiros-io/terraform-module-template/tree/master/test
+[Makefile]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/Makefile
+[Testdirectory]: https://github.com/mineiros-io/terraform-aws-lambda-function/tree/master/test
 <!-- markdown-link-check-enable -->
 
-[homepage]: https://mineiros.io/?ref=terraform-module-template
+[homepage]: https://mineiros.io/?ref=terraform-aws-lambda-function
 [Terratest]: https://github.com/gruntwork-io/terratest
 [package testing]: https://golang.org/pkg/testing/
 [Docker]: https://docs.docker.com/get-started/

@@ -48,3 +48,6 @@ vendor
 
 # Terraform crash log files
 crash.log
+
+# Generated Deployment Package
+main.py.zip
