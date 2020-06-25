@@ -32,7 +32,7 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
-  tags = var.module_tags
+  tags = merge(var.module_tags, var.function_tags)
 
   depends_on = [var.module_depends_on]
 }

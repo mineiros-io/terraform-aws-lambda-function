@@ -60,6 +60,11 @@ output "filename" {
   value       = var.filename
 }
 
+output "function_tags" {
+  description = "The map of tags that will be applied to the function."
+  value       = var.function_name
+}
+
 output "timeout" {
   description = "The amount of time the Lambda function has to run in seconds."
   value       = var.timeout
@@ -74,12 +79,7 @@ output "module_enabled" {
   value       = var.module_enabled
 }
 
-output "module_defaults" {
-  description = "Default settings that overwrite the module and resource defaults in this module."
-  value       = var.module_defaults
-}
-
 output "module_tags" {
-  description = "A map of tags that will be applied to all created resources that accept tags."
+  description = "The map of tags that will be applied to all created resources that accept tags."
   value       = var.module_tags
 }

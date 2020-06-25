@@ -85,9 +85,15 @@ variable "module_enabled" {
   default     = true
 }
 
-variable "module_defaults" {
-  type        = any
-  description = "(Optional) Default settings that overwrite the module and resource defaults in this module."
+//variable "module_defaults" {
+//  type        = any
+//  description = "(Optional) Default settings that overwrite the module and resource defaults in this module."
+//  default     = {}
+//}
+
+variable "function_tags" {
+  description = "(Optional) A map of tags that will be applied to the function."
+  type        = map(string)
   default     = {}
 }
 
