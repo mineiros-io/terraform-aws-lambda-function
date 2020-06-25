@@ -78,8 +78,8 @@ If everything looks good, they will merge the code and release a new version whi
 <!-- References -->
 
 <!-- markdown-link-check-disable -->
-[Pull Requests]: https://github.com/mineiros-io/terraform-module-template/pulls
-[pre-commit-file]: https://github.com/mineiros-io/terraform-module-template/blob/master/.pre-commit-config.yaml
+[Pull Requests]: https://github.com/mineiros-io/terraform-aws-lambda-function/pulls
+[pre-commit-file]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/.pre-commit-config.yaml
 <!-- markdown-link-check-enable -->
 
 [Github Flow]: https://guides.github.com/introduction/flow/
