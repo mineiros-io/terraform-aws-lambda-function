@@ -17,7 +17,7 @@ terraform, please see the code in the [main.tf] file.
 
 ```hcl
 module "terraform-aws-lambda-function" {
-  source = "git@github.com:mineiros-io/terraform-aws-lambda-function.git"
+  source = "git@github.com:mineiros-io/terraform-aws-lambda-function.git?ref=v0.0.1"
 
   function_name = "python-function"
   description   = "Example Python Lambda Function that returns an HTTP response."
@@ -32,31 +32,6 @@ module "terraform-aws-lambda-function" {
 
   module_tags = {
     Environment = "dev"
-  }
-}
-
-# ------------------------------------------------------------------------------
-# CREATE AN IAM LAMBDA EXECUTION ROLE WHICH WILL BE ATTACHED TO THE FUNCTION
-# ------------------------------------------------------------------------------
-
-resource "aws_iam_role" "lambda" {
-  name               = "python-function"
-  assume_role_policy = data.aws_iam_policy_document.lambda_role.json
-
-  tags = {
-    Environment = "dev"
-  }
-}
-
-data "aws_iam_policy_document" "lambda_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
   }
 }
 ```
