@@ -1,15 +1,15 @@
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # ENVIRONMENT VARIABLES
 # Define these secrets as environment variables.
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
 # AWS_ACCESS_KEY_ID
 # AWS_SECRET_ACCESS_KEY
 
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # REQUIRED PARAMETERS
 # These variables must be set when using this module.
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
 variable "function_name" {
   description = "(Required) A unique name for the Lambda function."
@@ -26,10 +26,10 @@ variable "runtime" {
   type        = string
 }
 
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These variables have defaults, but may be overridden.
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
 variable "description" {
   type        = string
@@ -73,23 +73,17 @@ variable "timeout" {
   default     = 3
 }
 
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # MODULE CONFIGURATION PARAMETERS
 # These variables are used to configure the module.
 # See https://medium.com/mineiros/the-ultimate-guide-on-how-to-write-terraform-modules-part-1-81f86d31f024
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
 variable "module_enabled" {
   type        = bool
   description = "(Optional) Whether to create resources within the module or not."
   default     = true
 }
-
-//variable "module_defaults" {
-//  type        = any
-//  description = "(Optional) Default settings that overwrite the module and resource defaults in this module."
-//  default     = {}
-//}
 
 variable "function_tags" {
   description = "(Optional) A map of tags that will be applied to the function."
