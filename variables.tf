@@ -43,10 +43,10 @@ variable "environment_variables" {
   default     = {}
 }
 
-variable "publish" {
-  type        = bool
-  description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments. Note that an alternative way to run Lambda functions in multiple environments is to version the Terraform code."
-  default     = false
+variable "filename" {
+  description = "(Optional) The path to the .zip file that contains the Lambda function source code."
+  type        = string
+  default     = null
 }
 
 variable "memory_size" {
@@ -55,14 +55,32 @@ variable "memory_size" {
   default     = 128
 }
 
+variable "publish" {
+  type        = bool
+  description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments. Note that an alternative way to run Lambda functions in multiple environments is to version the Terraform code."
+  default     = false
+}
+
 variable "role_arn" {
   description = "(Optional) The ARN of the policy that is used to set the permissions boundary for the IAM role for the Lambda function."
   type        = string
   default     = null
 }
 
-variable "filename" {
-  description = "(Optional) The path to the .zip file that contains the Lambda function source code."
+variable "s3_bucket" {
+  description = "(Optional) The S3 bucket location containing the function's deployment package. Conflicts with 'filename'. This bucket must reside in the same AWS region where you are creating the Lambda function."
+  type        = string
+  default     = null
+}
+
+variable "s3_key" {
+  description = "(Optional) The S3 key of an object containing the function's deployment package. Conflicts with 'filename'."
+  type        = string
+  default     = null
+}
+
+variable "s3_object_version" {
+  description = "(Optional) The object version containing the function's deployment package. Conflicts with 'filename'."
   type        = string
   default     = null
 }

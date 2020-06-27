@@ -40,21 +40,6 @@ output "environment_variables" {
   value       = var.environment_variables
 }
 
-output "publish" {
-  description = "Whether to publish creation/change as new Lambda function."
-  value       = var.publish
-}
-
-output "memory_size" {
-  description = "Amount of memory in MB the Lambda function can use at runtime."
-  value       = var.memory_size
-}
-
-output "role_arn" {
-  description = "The ARN of the policy that is used to set the permissions boundary for the IAM role for the Lambda function."
-  value       = var.role_arn
-}
-
 output "filename" {
   description = "The path to the .zip file that contains the Lambda function source code."
   value       = var.filename
@@ -63,6 +48,36 @@ output "filename" {
 output "function_tags" {
   description = "The map of tags that will be applied to the function."
   value       = var.function_name
+}
+
+output "memory_size" {
+  description = "Amount of memory in MB the Lambda function can use at runtime."
+  value       = var.memory_size
+}
+
+output "publish" {
+  description = "Whether to publish creation/change as new Lambda function."
+  value       = var.publish
+}
+
+output "role_arn" {
+  description = "The ARN of the policy that is used to set the permissions boundary for the IAM role for the Lambda function."
+  value       = var.role_arn
+}
+
+output "s3_bucket" {
+  description = "The S3 bucket location containing the function's deployment package."
+  value       = var.s3_bucket
+}
+
+output "s3_key" {
+  description = "The S3 key of an object containing the function's deployment package."
+  value       = var.s3_key
+}
+
+output "s3_object_version" {
+  description = "The object version containing the function's deployment package."
+  value       = var.s3_object_version
 }
 
 output "timeout" {
