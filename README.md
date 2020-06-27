@@ -13,6 +13,10 @@ on [Amazon Web Services (AWS)][AWS].
 
 ***This module supports both, Terraform v0.13 as well as v0.12.20 and above.***
 
+This module is part of our Infrastructure as Code (IaC) framework
+that enables our users and customers to easily deploy and manage reusable,
+secure, and production-grade cloud infrastructure.
+
 - [Module Features](#module-features)
 - [Getting Started](#getting-started)
 - [Module Argument Reference](#module-argument-reference)
@@ -145,14 +149,15 @@ Given a version number `MAJOR.MINOR.PATCH`, we increment the:
 
 ## About Mineiros
 
-Mineiros is a [DevOps as a Service][homepage] company based in Berlin, Germany.
-We offer commercial support for all of our projects and encourage you to reach out
-if you have any questions or need help. Feel free to send us an email at [hello@mineiros.io] or join our [Community Slack channel][slack].
+[Mineiros][homepage] is a remote-first company headquartered in Berlin, Germany
+that solves development, automation and security challenges in cloud infrastructure.
 
-We can also help you with:
+Our vision is to massively reduce time and overhead for teams to manage and
+deploy production-grade and secure cloud infrastructure.
 
-- Terraform modules for all types of infrastructure such as VPCs, Docker clusters, databases, logging and monitoring, CI, etc.
-- Consulting & training on AWS, Terraform and DevOps
+We offer commercial support for all of our modules and encourage you to reach out
+if you have any questions or need help. Feel free to email us at [hello@mineiros.io] or join our
+[Community Slack channel][slack].
 
 ## Reporting Issues
 
