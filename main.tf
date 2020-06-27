@@ -16,10 +16,15 @@ resource "aws_lambda_function" "lambda" {
   description   = var.description
 
   filename = var.filename
-  runtime  = var.runtime
-  handler  = var.handler
-  publish  = var.publish
-  role     = var.role_arn
+
+  s3_bucket         = var.s3_bucket
+  s3_key            = var.s3_key
+  s3_object_version = var.s3_object_version
+
+  runtime = var.runtime
+  handler = var.handler
+  publish = var.publish
+  role    = var.role_arn
 
   memory_size = var.memory_size
   timeout     = var.timeout
