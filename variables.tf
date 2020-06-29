@@ -56,13 +56,13 @@ variable "filename" {
 }
 
 variable "kms_key_arn" {
-  description = "(Optional) Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. If this configuration is provided when environment variables are not in use, the AWS Lambda API does not save this configuration and Terraform will show a perpetual difference of adding the key. To fix the perpetual difference, remove this configuration."
+  description = "(Optional) The ARN for the KMS encryption key that is used to encrypt environment variables. If none is provided when environment variables are in use, AWS Lambda uses a default service key."
   type        = string
   default     = null
 }
 
-variable "layers" {
-  description = "(Optional) List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"
+variable "layer_arns" {
+  description = "(Optional) Set of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"
   type        = set(string)
   default     = []
 }
@@ -74,13 +74,13 @@ variable "memory_size" {
 }
 
 variable "publish" {
-  description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments. Note that an alternative way to run Lambda functions in multiple environments is to version the Terraform code."
+  description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments."
   type        = bool
   default     = false
 }
 
 variable "reserved_concurrent_executions" {
-  description = "Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html"
+  description = "(Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html"
   type        = string
   default     = "-1"
 }
@@ -116,13 +116,13 @@ variable "timeout" {
 }
 
 variable "vpc_subnet_ids" {
-  description = "(Optional) A list of subnet IDs associated with the Lambda function."
+  description = "(Optional) A set of subnet IDs associated with the Lambda function."
   type        = set(string)
   default     = []
 }
 
 variable "vpc_security_group_ids" {
-  description = "(Required) A list of security group IDs associated with the Lambda function."
+  description = "(Optional) A set of security group IDs associated with the Lambda function."
   type        = set(string)
   default     = []
 }

@@ -11,6 +11,10 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+provider "archive" {
+  version = "~> 1.3"
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # AWS LAMBDA EXPECTS A DEPLOYMENT PACKAGE
 # A deployment package is a ZIP archive that contains your function code and dependencies.
