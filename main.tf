@@ -22,6 +22,7 @@ resource "aws_lambda_function" "lambda" {
 
   runtime = var.runtime
   handler = var.handler
+  layers  = var.layers
   publish = var.publish
   role    = var.role_arn
 
@@ -29,6 +30,8 @@ resource "aws_lambda_function" "lambda" {
   timeout     = var.timeout
 
   reserved_concurrent_executions = var.reserved_concurrent_executions
+
+  kms_key_arn = var.kms_key_arn
 
   dynamic environment {
     for_each = length(var.environment_variables) > 0 ? [true] : []

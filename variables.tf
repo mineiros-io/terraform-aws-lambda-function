@@ -55,6 +55,18 @@ variable "filename" {
   default     = null
 }
 
+variable "kms_key_arn" {
+  description = "(Optional) Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. If this configuration is provided when environment variables are not in use, the AWS Lambda API does not save this configuration and Terraform will show a perpetual difference of adding the key. To fix the perpetual difference, remove this configuration."
+  type        = string
+  default     = null
+}
+
+variable "layers" {
+  description = "(Optional) List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"
+  type        = set(string)
+  default     = []
+}
+
 variable "memory_size" {
   description = "(Optional) Amount of memory in MB the Lambda function can use at runtime. For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html"
   type        = number

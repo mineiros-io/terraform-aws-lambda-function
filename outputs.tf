@@ -25,6 +25,8 @@ output "module_inputs" {
     function_tags                  = var.function_tags
     function_name                  = var.function_name
     handler                        = var.handler
+    kms_key_arn                    = var.kms_key_arn
+    layers                         = var.layers
     memory_size                    = var.memory_size
     publish                        = var.publish
     reserved_concurrent_executions = var.reserved_concurrent_executions
