@@ -31,9 +31,15 @@ variable "runtime" {
 # These variables have defaults, but may be overridden.
 # ----------------------------------------------------------------------------------------------------------------------
 
-variable "description" {
+variable "dead_letter_config_target_arn" {
+  description = "(Optional) The ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted."
   type        = string
+  default     = ""
+}
+
+variable "description" {
   description = "(Optional) A description of what the Lambda function does."
+  type        = string
   default     = null
 }
 
@@ -56,9 +62,15 @@ variable "memory_size" {
 }
 
 variable "publish" {
-  type        = bool
   description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments. Note that an alternative way to run Lambda functions in multiple environments is to version the Terraform code."
+  type        = bool
   default     = false
+}
+
+variable "reserved_concurrent_executions" {
+  description = "Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html"
+  type        = string
+  default     = "-1"
 }
 
 variable "role_arn" {

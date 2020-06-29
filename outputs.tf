@@ -18,20 +18,22 @@ output "function" {
 output "module_inputs" {
   description = "A map of all module arguments."
   value = {
-    description           = var.description
-    environment_variables = var.environment_variables
-    filename              = var.filename
-    function_tags         = var.function_tags
-    function_name         = var.function_name
-    handler               = var.handler
-    memory_size           = var.memory_size
-    publish               = var.publish
-    runtime               = var.runtime
-    role_arn              = var.role_arn
-    s3_bucket             = var.s3_bucket
-    s3_key                = var.s3_key
-    s3_object_version     = var.s3_object_version
-    timeout               = var.timeout
+    dead_letter_config_target_arn  = var.dead_letter_config_target_arn
+    description                    = var.description
+    environment_variables          = var.environment_variables
+    filename                       = var.filename
+    function_tags                  = var.function_tags
+    function_name                  = var.function_name
+    handler                        = var.handler
+    memory_size                    = var.memory_size
+    publish                        = var.publish
+    reserved_concurrent_executions = var.reserved_concurrent_executions
+    runtime                        = var.runtime
+    role_arn                       = var.role_arn
+    s3_bucket                      = var.s3_bucket
+    s3_key                         = var.s3_key
+    s3_object_version              = var.s3_object_version
+    timeout                        = var.timeout
   }
 }
 

@@ -28,11 +28,21 @@ resource "aws_lambda_function" "lambda" {
   memory_size = var.memory_size
   timeout     = var.timeout
 
+  reserved_concurrent_executions = var.reserved_concurrent_executions
+
   dynamic environment {
     for_each = length(var.environment_variables) > 0 ? [true] : []
 
     content {
       variables = var.environment_variables
+    }
+  }
+
+  dynamic dead_letter_config {
+    for_each = length(var.dead_letter_config_target_arn) > 0 ? [true] : []
+
+    content {
+      target_arn = var.dead_letter_config_target_arn
     }
   }
 
