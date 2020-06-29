@@ -115,6 +115,19 @@ variable "timeout" {
   default     = 3
 }
 
+variable "vpc_subnet_ids" {
+  description = "(Optional) A list of subnet IDs associated with the Lambda function."
+  type        = set(string)
+  default     = []
+}
+
+variable "vpc_security_group_ids" {
+  description = "(Required) A list of security group IDs associated with the Lambda function."
+  type        = set(string)
+  default     = []
+}
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # MODULE CONFIGURATION PARAMETERS
 # These variables are used to configure the module.

@@ -49,6 +49,15 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
+  dynamic vpc_config {
+    for_each = length(var.vpc_subnet_ids) > 0 && length(var.vpc_security_group_ids)  > 0 ? [true] : []
+
+    content {
+      security_group_ids = var.vpc_security_group_ids
+      subnet_ids         = var.vpc_security_group_ids
+    }
+  }
+
   tags = merge(var.module_tags, var.function_tags)
 
   depends_on = [var.module_depends_on]
