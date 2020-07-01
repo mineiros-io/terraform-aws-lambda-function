@@ -9,7 +9,7 @@ locals {
   s3_key            = var.filename != null ? null : var.s3_key
   s3_object_version = var.filename != null ? null : var.s3_object_version
 
-  source_code_hash = var.source_code_hash != null ? var.source_code_hash : var.filename != null ? filebase64sha256(var.filename) : local.s3_key != null ? filebase64sha256(local.s3_key) : null
+  source_code_hash = var.source_code_hash != null ? var.source_code_hash : var.filename != null ? filebase64sha256(var.filename) : null
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -67,4 +67,3 @@ resource "aws_lambda_function" "lambda" {
 
   depends_on = [var.module_depends_on]
 }
-
