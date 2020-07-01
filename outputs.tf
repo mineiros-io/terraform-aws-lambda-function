@@ -37,6 +37,7 @@ output "module_inputs" {
     s3_object_version              = local.s3_object_version
     source_code_hash               = local.source_code_hash
     timeout                        = var.timeout
+    tracing_mode                   = var.tracing_mode
     vpc_subnet_ids                 = var.vpc_subnet_ids
     vpc_security_group_ids         = var.vpc_security_group_ids
   }

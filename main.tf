@@ -63,6 +63,14 @@ resource "aws_lambda_function" "lambda" {
     subnet_ids         = var.vpc_subnet_ids
   }
 
+  dynamic tracing_config {
+    for_each = var.tracing_mode != null ? [true] : []
+
+    content {
+      mode = var.tracing_mode
+    }
+  }
+
   tags = merge(var.module_tags, var.function_tags)
 
   depends_on = [var.module_depends_on]
