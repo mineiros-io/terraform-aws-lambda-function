@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLambdaFunction(t *testing.T) {
+func TestLambdaPython(t *testing.T) {
 	t.Parallel()
 
 	functionName := strings.ToLower(fmt.Sprintf("lambda-test-%s", random.UniqueId()))
@@ -30,7 +30,7 @@ func TestLambdaFunction(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
 		// The path to where the Terraform code is located
-		TerraformDir: "./lambda-python-test",
+		TerraformDir: "./lambda-python",
 		Vars: map[string]interface{}{
 			"function_name": functionName,
 			"description":   description,
