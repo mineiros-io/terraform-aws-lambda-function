@@ -35,6 +35,7 @@ output "module_inputs" {
     s3_bucket                      = var.s3_bucket
     s3_key                         = var.s3_key
     s3_object_version              = var.s3_object_version
+    source_code_hash               = var.source_code_hash
     timeout                        = var.timeout
     vpc_subnet_ids                 = var.vpc_subnet_ids
     vpc_security_group_ids         = var.vpc_security_group_ids

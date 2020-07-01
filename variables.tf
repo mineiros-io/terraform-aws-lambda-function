@@ -103,6 +103,12 @@ variable "s3_key" {
   default     = null
 }
 
+variable "source_code_hash" {
+  description = "(Optional) Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key."
+  type        = string
+  default     = null
+}
+
 variable "s3_object_version" {
   description = "(Optional) The object version containing the function's deployment package. Conflicts with 'filename'."
   type        = string

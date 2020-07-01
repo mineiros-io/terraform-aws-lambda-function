@@ -4,6 +4,14 @@
 # to create a serverless function.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+locals {
+  s3_bucket         = var.filename != null ? null : var.s3_bucket
+  s3_key            = var.filename != null ? null : var.s3_key
+  s3_object_version = var.filename != null ? null : var.s3_object_version
+
+  source_code_hash = var.source_code_hash != null ? var.source_code_hash : var.filename != null ? filebase64sha256(var.filename) : local.s3_key != null ? filebase64sha256(local.s3_key) : null
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE A LAMBDA FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
@@ -14,11 +22,12 @@ resource "aws_lambda_function" "lambda" {
   function_name = var.function_name
   description   = var.description
 
-  filename = var.filename
+  filename         = var.filename
+  source_code_hash = local.source_code_hash
 
-  s3_bucket         = var.s3_bucket
-  s3_key            = var.s3_key
-  s3_object_version = var.s3_object_version
+  s3_bucket         = local.s3_bucket
+  s3_key            = local.s3_key
+  s3_object_version = local.s3_object_version
 
   runtime = var.runtime
   handler = var.handler
@@ -58,3 +67,4 @@ resource "aws_lambda_function" "lambda" {
 
   depends_on = [var.module_depends_on]
 }
+
