@@ -32,9 +32,10 @@ output "module_inputs" {
     reserved_concurrent_executions = var.reserved_concurrent_executions
     runtime                        = var.runtime
     role_arn                       = var.role_arn
-    s3_bucket                      = var.s3_bucket
-    s3_key                         = var.s3_key
-    s3_object_version              = var.s3_object_version
+    s3_bucket                      = local.s3_bucket
+    s3_key                         = local.s3_key
+    s3_object_version              = local.s3_object_version
+    source_code_hash               = local.source_code_hash
     timeout                        = var.timeout
     vpc_subnet_ids                 = var.vpc_subnet_ids
     vpc_security_group_ids         = var.vpc_security_group_ids
