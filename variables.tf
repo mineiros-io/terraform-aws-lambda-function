@@ -31,9 +31,15 @@ variable "runtime" {
 # These variables have defaults, but may be overridden.
 # ----------------------------------------------------------------------------------------------------------------------
 
-variable "description" {
+variable "dead_letter_config_target_arn" {
+  description = "(Optional) The ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted."
   type        = string
+  default     = ""
+}
+
+variable "description" {
   description = "(Optional) A description of what the Lambda function does."
+  type        = string
   default     = null
 }
 
@@ -49,6 +55,18 @@ variable "filename" {
   default     = null
 }
 
+variable "kms_key_arn" {
+  description = "(Optional) The ARN for the KMS encryption key that is used to encrypt environment variables. If none is provided when environment variables are in use, AWS Lambda uses a default service key."
+  type        = string
+  default     = null
+}
+
+variable "layer_arns" {
+  description = "(Optional) Set of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"
+  type        = set(string)
+  default     = []
+}
+
 variable "memory_size" {
   description = "(Optional) Amount of memory in MB the Lambda function can use at runtime. For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html"
   type        = number
@@ -56,9 +74,15 @@ variable "memory_size" {
 }
 
 variable "publish" {
+  description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments."
   type        = bool
-  description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments. Note that an alternative way to run Lambda functions in multiple environments is to version the Terraform code."
   default     = false
+}
+
+variable "reserved_concurrent_executions" {
+  description = "(Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html"
+  type        = string
+  default     = "-1"
 }
 
 variable "role_arn" {
@@ -90,6 +114,19 @@ variable "timeout" {
   type        = number
   default     = 3
 }
+
+variable "vpc_subnet_ids" {
+  description = "(Optional) A set of subnet IDs associated with the Lambda function."
+  type        = set(string)
+  default     = []
+}
+
+variable "vpc_security_group_ids" {
+  description = "(Optional) A set of security group IDs associated with the Lambda function."
+  type        = set(string)
+  default     = []
+}
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # MODULE CONFIGURATION PARAMETERS

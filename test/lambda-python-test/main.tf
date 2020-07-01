@@ -7,6 +7,10 @@ provider "aws" {
   region  = var.aws_region
 }
 
+provider "archive" {
+  version = "~> 1.3"
+}
+
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "${path.module}/main.py"
