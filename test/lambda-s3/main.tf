@@ -25,16 +25,14 @@ data "archive_file" "lambda" {
 # CREATE A S3 BUCKET AND UPLOAD THE ARCHIVE AS AN OBJECT
 # ----------------------------------------------------------------------------------------------------------------------
 
-module "s3_bucket" {
-  source  = "mineiros-io/s3-bucket/aws"
-  version = "~> 0.2.1"
-
+resource "aws_s3_bucket" "lambda" {
   bucket        = var.s3_bucket_name
+  acl           = "private"
   force_destroy = var.s3_force_destroy
 }
 
 resource "aws_s3_bucket_object" "function" {
-  bucket = module.s3_bucket.id
+  bucket = aws_s3_bucket.lambda.bucket
   key    = "main.py.zip"
   source = data.archive_file.lambda.output_path
 }

@@ -4,8 +4,8 @@ output "all" {
 }
 
 output "s3_bucket" {
-  description = "All outputs of the 'terraform-aws-s3-bucket' module."
-  value       = module.s3_bucket
+  description = "All outputs of the 'aws_s3_bucket' resource."
+  value       = aws_s3_bucket.lambda
 }
 
 output "s3_object" {
