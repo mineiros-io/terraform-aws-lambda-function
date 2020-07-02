@@ -68,59 +68,26 @@ module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
   version = "0.0.2"
 
-  assume_role_policy = data.aws_iam_policy_document.lambda_role.json
-
-  tags = var.module_tags
-}
-
-data "aws_iam_policy_document" "lambda_role" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "sts:AssumeRole",
-    ]
-
-    principals {
+  assume_role_principals = [
+    {
       type        = "Service"
       identifiers = ["lambda.amazonaws.com"]
     }
-  }
-}
+  ]
 
-# ----------------------------------------------------------------------------------------------------------------------
-# CREATE AN IAM POLICY THAT ALLOWS LAMBDA TO MANAGE NETWORK INTERFACES
-# ----------------------------------------------------------------------------------------------------------------------
+  policy_statements = [
+    {
+      sid = "LambdaVPCAccess"
 
-# See also the following AWS managed policy: AWSLambdaBasicExecutionRole
-# TODO: Should be replaced with AWSLambdaVPCAccessExecutionRole ?
-# https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html
-module "lambda_vpc_iam_policy" {
-  source  = "mineiros-io/iam-policy/aws"
-  version = "0.0.2"
+      actions = [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DetachNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+      ]
+      resources = ["*"]
+    }
+  ]
 
-  name        = "LambdaVPCAccess"
-  path        = "/"
-  description = "IAM policy for logging from a lambda"
-
-  policy = data.aws_iam_policy_document.lambda_vpc.json
-}
-
-data "aws_iam_policy_document" "lambda_vpc" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "ec2:CreateNetworkInterface",
-      "ec2:DescribeNetworkInterfaces",
-      "ec2:DetachNetworkInterface",
-      "ec2:DeleteNetworkInterface",
-    ]
-
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_vpc" {
-  role       = module.iam_role.role.name
-  policy_arn = module.lambda_vpc_iam_policy.policy.arn
+  tags = var.module_tags
 }
