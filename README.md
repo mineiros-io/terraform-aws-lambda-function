@@ -186,7 +186,7 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [hello@mineiros.io]: mailto:hello@mineiros.io
 
 <!-- markdown-link-check-disable -->
-[badge-build]: https://mineiros.semaphoreci.com/badges/terraform-aws-lambda-function/branches/master.svg?style=shields&key=df11a416-f581-4d35-917a-fa3c2de2048e
+[badge-build]: https://mineiros.semaphoreci.com/badges/terraform-aws-lambda-function/branches/master.svg?style=shields&key=7e08fa4e-5242-4de9-b306-0e19637772e8
 <!-- markdown-link-check-enable -->
 [badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-aws-lambda-function.svg?label=latest&sort=semver
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
