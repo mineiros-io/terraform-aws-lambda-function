@@ -42,7 +42,7 @@ module "terraform-aws-lambda-function" {
   timeout     = 30
   memory_size = 128
 
-  role_arn = aws_iam_role.lambda.arn
+  role_arn = module.iam_role.role.arn
 
   module_tags = {
     Environment = "dev"
@@ -53,23 +53,18 @@ module "terraform-aws-lambda-function" {
 # CREATE AN IAM LAMBDA EXECUTION ROLE WHICH WILL BE ATTACHED TO THE FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 
-resource "aws_iam_role" "lambda" {
-  name               = "python-function"
-  assume_role_policy = data.aws_iam_policy_document.lambda_role.json
+module "iam_role" {
+  source  = "mineiros-io/iam-role/aws"
+  version = "0.0.2"
 
-  tags = {
-    Environment = "dev"
-  }
-}
+  name = "python-function"
 
-data "aws_iam_policy_document" "lambda_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
+  assume_role_principals = [
+    {
       type        = "Service"
       identifiers = ["lambda.amazonaws.com"]
     }
-  }
+  ]
+
+  tags = {}
 }

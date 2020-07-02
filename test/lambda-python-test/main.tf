@@ -25,7 +25,7 @@ module "lambda" {
 
   runtime  = var.runtime
   handler  = var.handler
-  role_arn = aws_iam_role.lambda.arn
+  role_arn = module.iam_role.role.arn
   filename = data.archive_file.lambda.output_path
 
   timeout     = var.timeout
@@ -39,21 +39,18 @@ module "lambda" {
 # CREATE AN IAM ROLE THAT WILL BE ATTACHED TO THE LAMBDA FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 
-resource "aws_iam_role" "lambda" {
-  name               = var.function_name
-  assume_role_policy = data.aws_iam_policy_document.lambda_role.json
+module "iam_role" {
+  source  = "mineiros-io/iam-role/aws"
+  version = "0.0.2"
 
-  tags = var.module_tags
-}
+  name = var.function_name
 
-data "aws_iam_policy_document" "lambda_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
+  assume_role_principals = [
+    {
       type        = "Service"
       identifiers = ["lambda.amazonaws.com"]
     }
-  }
+  ]
+
+  tags = var.module_tags
 }
