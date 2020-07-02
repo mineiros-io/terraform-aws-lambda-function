@@ -121,6 +121,12 @@ variable "timeout" {
   default     = 3
 }
 
+variable "tracing_mode" {
+  description = "(Optional) Can be either 'PassThrough' or 'Active'. If set to 'PassThrough', Lambda will only trace the request from an upstream service if it contains a tracing header with 'sampled=1'. If set to 'Active', Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision."
+  type        = string
+  default     = null
+}
+
 variable "vpc_subnet_ids" {
   description = "(Optional) A set of subnet IDs associated with the Lambda function."
   type        = set(string)
