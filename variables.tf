@@ -31,6 +31,12 @@ variable "runtime" {
 # These variables have defaults, but may be overridden.
 # ----------------------------------------------------------------------------------------------------------------------
 
+variable "aliases" {
+  description = "(Optional) A map of aliases (keyed by the alias name) that will be created for the Lambda function. If 'version' is omitted, the alias will automatically point to '$LATEST'."
+  type        = any
+  default     = {}
+}
+
 variable "dead_letter_config_target_arn" {
   description = "(Optional) The ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted."
   type        = string
