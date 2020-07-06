@@ -38,9 +38,8 @@ module "terraform-aws-lambda-function" {
   filename      = data.archive_file.lambda.output_path
   runtime       = "python3.8"
   handler       = "main.lambda_handler"
-
-  timeout     = 30
-  memory_size = 128
+  timeout       = 30
+  memory_size   = 128
 
   role_arn = module.iam_role.role.arn
 

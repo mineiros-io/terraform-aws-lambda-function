@@ -11,6 +11,11 @@ output "function" {
   value       = try(aws_lambda_function.lambda[0], null)
 }
 
+output "aliases" {
+  description = "A map of all created 'aws_lambda_alias' resources keyed by name."
+  value       = try(aws_lambda_alias.alias, null)
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # OUTPUT ALL INPUT VARIABLES
 # ----------------------------------------------------------------------------------------------------------------------
@@ -18,6 +23,7 @@ output "function" {
 output "module_inputs" {
   description = "A map of all module arguments."
   value = {
+    aliases                        = local.aliases
     dead_letter_config_target_arn  = var.dead_letter_config_target_arn
     description                    = var.description
     environment_variables          = var.environment_variables

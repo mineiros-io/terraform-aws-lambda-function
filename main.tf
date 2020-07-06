@@ -75,3 +75,34 @@ resource "aws_lambda_function" "lambda" {
 
   depends_on = [var.module_depends_on]
 }
+
+# ----------------------------------------------------------------------------------------------------------------------
+# CREATE ONE OR MANY ALIASES FOR THE LAMBDA FUNCTION
+# ----------------------------------------------------------------------------------------------------------------------
+
+locals {
+  aliases = {
+    for name, config in var.aliases : name => {
+      description                = try(config.description, ""),
+      version                    = try(config.version, "$LATEST")
+      additional_version_weights = try(config.additional_version_weights, {})
+    }
+  }
+}
+
+resource "aws_lambda_alias" "alias" {
+  for_each = var.module_enabled ? local.aliases : {}
+
+  name             = each.key
+  description      = each.value.description
+  function_name    = aws_lambda_function.lambda[0].function_name
+  function_version = each.value.version
+
+  dynamic routing_config {
+    for_each = length(each.value.additional_version_weights) > 0 ? [true] : []
+
+    content {
+      additional_version_weights = each.value.additional_version_weights
+    }
+  }
+}
