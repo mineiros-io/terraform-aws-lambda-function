@@ -16,6 +16,11 @@ output "aliases" {
   value       = try(aws_lambda_alias.alias, null)
 }
 
+output "permissions" {
+  description = "A map of all created 'aws_lambda_permission' resources keyed by name."
+  value       = try(aws_lambda_permission.permission, null)
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # OUTPUT ALL INPUT VARIABLES
 # ----------------------------------------------------------------------------------------------------------------------
@@ -34,6 +39,7 @@ output "module_inputs" {
     kms_key_arn                    = var.kms_key_arn
     layer_arns                     = var.layer_arns
     memory_size                    = var.memory_size
+    permissions                    = local.permissions
     publish                        = var.publish
     reserved_concurrent_executions = var.reserved_concurrent_executions
     runtime                        = var.runtime

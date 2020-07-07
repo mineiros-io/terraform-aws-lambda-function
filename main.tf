@@ -77,7 +77,7 @@ resource "aws_lambda_function" "lambda" {
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
-# CREATE ONE OR MANY ALIASES FOR THE LAMBDA FUNCTION
+# CREATE A MAP OF ALIASES FOR THE LAMBDA FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 
 locals {
@@ -105,4 +105,34 @@ resource "aws_lambda_alias" "alias" {
       additional_version_weights = each.value.additional_version_weights
     }
   }
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ATTACH A MAP OF PERMISSIONS TO THE LAMBDA FUNCTION
+# ----------------------------------------------------------------------------------------------------------------------
+
+locals {
+  permissions = {
+    for name, permission in var.permissions : name => {
+      action             = try(permission.action, "lambda:InvokeFunction")
+      event_source_token = try(permission.event_source_token, null)
+      principal          = permission.principal
+      qualifier          = try(permission.qualifier, null)
+      source_account     = try(permission.source_account, null)
+      source_arn         = permission.source_arn
+    }
+  }
+}
+
+resource "aws_lambda_permission" "permission" {
+  for_each = var.module_enabled ? var.permissions : {}
+
+  action             = each.value.action
+  event_source_token = each.value.event_source_token
+  function_name      = aws_lambda_function.lambda[0].function_name
+  principal          = each.value.principal
+  qualifier          = each.value.qualifier
+  statement_id       = each.key
+  source_account     = each.value.source_account
+  source_arn         = each.value.source_arn
 }
