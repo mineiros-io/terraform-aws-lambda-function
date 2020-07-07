@@ -76,10 +76,10 @@ variable "timeout" {
   default     = 3
 }
 
-variable "s3_bucket_name" {
-  description = "(Optional) The name of the S3 bucket that Lambda should to pull the deployment package from."
+variable "s3_bucket_prefix" {
+  description = "(Optional) Creates a unique bucket name beginning with the specified prefix."
   type        = string
-  default     = "mineiros-lambda-test-bucket"
+  default     = "mineiros-lambda-test-"
 }
 
 variable "s3_object_key" {

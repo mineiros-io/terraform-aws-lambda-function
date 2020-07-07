@@ -29,7 +29,7 @@ module "s3_bucket" {
   source  = "mineiros-io/s3-bucket/aws"
   version = "~> 0.2.1"
 
-  bucket        = var.s3_bucket_name
+  bucket_prefix = var.s3_bucket_prefix
   force_destroy = var.s3_force_destroy
 }
 
