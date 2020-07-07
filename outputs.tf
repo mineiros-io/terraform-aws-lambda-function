@@ -17,7 +17,7 @@ output "aliases" {
 }
 
 output "permissions" {
-  description = "A map of all created 'aws_lambda_permission' resources keyed by name."
+  description = "A map of all created 'aws_lambda_permission' resources keyed by statement_id."
   value       = try(aws_lambda_permission.permission, null)
 }
 

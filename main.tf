@@ -113,7 +113,7 @@ resource "aws_lambda_alias" "alias" {
 
 locals {
   permissions = {
-    for name, permission in var.permissions : name => {
+    for statement_id, permission in var.permissions : statement_id => {
       action             = try(permission.action, "lambda:InvokeFunction")
       event_source_token = try(permission.event_source_token, null)
       principal          = permission.principal
