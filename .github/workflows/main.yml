@@ -1,6 +1,6 @@
 name: CI/CD Pipeline
 
-on: [push, pull_request]
+on: push
 
 env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
