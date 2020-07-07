@@ -186,7 +186,7 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [hello@mineiros.io]: mailto:hello@mineiros.io
 
 <!-- markdown-link-check-disable -->
-[badge-build]: https://mineiros.semaphoreci.com/badges/terraform-aws-lambda-function/branches/master.svg?style=shields&key=7e08fa4e-5242-4de9-b306-0e19637772e8
+[badge-build]: https://github.com/mineiros-io/terraform-aws-lambda-function/workflows/CI/CD%20Pipeline/badge.svg
 <!-- markdown-link-check-enable -->
 [badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-aws-lambda-function.svg?label=latest&sort=semver
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
@@ -194,7 +194,7 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [badge-slack]: https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack
 
 <!-- markdown-link-check-disable -->
-[build-status]: https://mineiros.semaphoreci.com/projects/terraform-aws-lambda-function
+[build-status]: https://github.com/mineiros-io/terraform-aws-lambda-function/actions
 [releases-github]: https://github.com/mineiros-io/terraform-aws-lambda-function/releases
 <!-- markdown-link-check-enable -->
 [releases-terraform]: https://github.com/hashicorp/terraform/releases
