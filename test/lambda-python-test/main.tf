@@ -13,8 +13,8 @@ provider "archive" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "${path.module}/main.py"
-  output_path = "${path.module}/main.py.zip"
+  source_file = "${path.module}/../fixtures/python/main.py"
+  output_path = "${path.module}/../fixtures/python/main.py.zip"
 }
 
 module "lambda" {
