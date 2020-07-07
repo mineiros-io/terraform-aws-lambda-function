@@ -79,6 +79,12 @@ variable "memory_size" {
   default     = 128
 }
 
+variable "permissions" {
+  description = "(Optional) A map of external resources (like a CloudWatch Event Rule, SNS, or S3) that should have permission to access the Lambda function."
+  type        = any
+  default     = {}
+}
+
 variable "publish" {
   description = "(Optional) Whether to publish creation/change as new Lambda function. This allows you to use aliases to refer to execute different versions of the function in different environments."
   type        = bool
