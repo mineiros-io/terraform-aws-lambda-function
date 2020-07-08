@@ -23,6 +23,8 @@ func TestLambdaS3(t *testing.T) {
 	memorySize := float64(128)
 	timeout := float64(3)
 
+	s3BucketPrefix := "mineiros-lambda-test-"
+
 	moduleTags := map[string]string{
 		"Name":        functionName,
 		"Environment": "Dev",
@@ -32,14 +34,15 @@ func TestLambdaS3(t *testing.T) {
 		// The path to where the Terraform code is located
 		TerraformDir: "./lambda-s3",
 		Vars: map[string]interface{}{
-			"function_name": functionName,
-			"description":   description,
-			"handler":       handler,
-			"runtime":       runtime,
-			"publish":       publish,
-			"memory_size":   memorySize,
-			"timeout":       timeout,
-			"module_tags":   moduleTags,
+			"function_name":    functionName,
+			"description":      description,
+			"s3_bucket_prefix": s3BucketPrefix,
+			"handler":          handler,
+			"runtime":          runtime,
+			"publish":          publish,
+			"memory_size":      memorySize,
+			"timeout":          timeout,
+			"module_tags":      moduleTags,
 		},
 		Upgrade: true,
 	}
