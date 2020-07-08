@@ -26,7 +26,7 @@ output "permissions" {
 # ----------------------------------------------------------------------------------------------------------------------
 
 output "module_inputs" {
-  description = "A map of all module arguments."
+  description = "A map of all module arguments. Omitted optional arguments will be represented with their actual defaults."
   value = {
     aliases                        = local.aliases
     dead_letter_config_target_arn  = var.dead_letter_config_target_arn
@@ -39,7 +39,7 @@ output "module_inputs" {
     kms_key_arn                    = var.kms_key_arn
     layer_arns                     = var.layer_arns
     memory_size                    = var.memory_size
-    permissions                    = local.permissions
+    permissions                    = values(local.permissions)
     publish                        = var.publish
     reserved_concurrent_executions = var.reserved_concurrent_executions
     runtime                        = var.runtime
