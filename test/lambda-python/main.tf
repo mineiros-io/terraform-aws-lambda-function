@@ -32,6 +32,10 @@ module "lambda" {
   memory_size = var.memory_size
 
   module_tags = var.module_tags
+
+  aliases = {
+    latest = {}
+  }
 }
 
 

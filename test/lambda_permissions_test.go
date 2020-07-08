@@ -30,7 +30,7 @@ func TestLambdaPermissions(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
 		// The path to where the Terraform code is located
-		TerraformDir: "./lambda-with-vpc-config",
+		TerraformDir: "./lambda-sns-permissions",
 		Vars: map[string]interface{}{
 			"function_name": functionName,
 			"description":   description,

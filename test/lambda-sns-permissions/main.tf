@@ -39,12 +39,13 @@ module "lambda" {
   timeout     = var.timeout
   memory_size = var.memory_size
 
-  permissions = {
-    AllowExecutionFromSNS = {
-      principal  = "sns.amazonaws.com"
-      source_arn = aws_sns_topic.lambda.arn
+  permissions = [
+    {
+      statement_id = "AllowExecutionFromSNS"
+      principal    = "sns.amazonaws.com"
+      source_arn   = aws_sns_topic.lambda.arn
     }
-  }
+  ]
 
   module_tags = var.module_tags
 }

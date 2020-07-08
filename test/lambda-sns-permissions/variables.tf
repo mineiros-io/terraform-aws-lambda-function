@@ -76,24 +76,6 @@ variable "timeout" {
   default     = 3
 }
 
-variable "s3_bucket_name" {
-  description = "(Optional) The name of the S3 bucket that Lambda should to pull the deployment package from."
-  type        = string
-  default     = "mineiros-lambda-test-bucket"
-}
-
-variable "s3_object_key" {
-  description = "(Optional) The name of the object."
-  type        = string
-  default     = "main.py.zip"
-}
-
-variable "s3_force_destroy" {
-  description = "(Optional) A boolean that indicates all objects (including any locked objects) should be deleted from the bucket so that the bucket can be destroyed without error."
-  type        = bool
-  default     = true
-}
-
 variable "module_tags" {
   description = "(Optional) A map of tags to apply to all created resources that support tags."
   type        = map(string)
