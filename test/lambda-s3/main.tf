@@ -18,7 +18,7 @@ provider "archive" {
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "${path.module}/../fixtures/python/main.py"
-  output_path = "${path.module}/../fixtues/python/main.py.zip"
+  output_path = "${path.module}/../fixtures/python/main.py.zip"
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
