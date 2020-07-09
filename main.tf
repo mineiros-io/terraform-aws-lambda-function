@@ -125,7 +125,7 @@ locals {
 }
 
 resource "aws_lambda_permission" "permission" {
-  for_each = var.module_enabled ? var.permissions : {}
+  for_each = var.module_enabled ? local.permissions : {}
 
   action             = each.value.action
   event_source_token = each.value.event_source_token

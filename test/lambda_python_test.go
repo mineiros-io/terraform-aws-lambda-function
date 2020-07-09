@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLambdaPermissions(t *testing.T) {
+func TestLambdaFunction(t *testing.T) {
 	t.Parallel()
 
 	functionName := strings.ToLower(fmt.Sprintf("lambda-test-%s", random.UniqueId()))
@@ -30,7 +30,7 @@ func TestLambdaPermissions(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
 		// The path to where the Terraform code is located
-		TerraformDir: "./lambda-with-vpc-config",
+		TerraformDir: "./lambda-python",
 		Vars: map[string]interface{}{
 			"function_name": functionName,
 			"description":   description,
@@ -61,4 +61,5 @@ func TestLambdaPermissions(t *testing.T) {
 	assert.Equal(t, publish, functionOutputs["publish"])
 	assert.Equal(t, memorySize, functionOutputs["memory_size"])
 	assert.Equal(t, timeout, functionOutputs["timeout"])
+
 }

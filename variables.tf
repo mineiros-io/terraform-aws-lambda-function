@@ -80,9 +80,9 @@ variable "memory_size" {
 }
 
 variable "permissions" {
-  description = "(Optional) A map of external resources (like a CloudWatch Event Rule, SNS, or S3) that should have permission to access the Lambda function."
+  description = "(Optional) A list of permission objects of external resources (like a CloudWatch Event Rule, SNS, or S3) that should have permission to access the Lambda function."
   type        = any
-  default     = {}
+  default     = []
 }
 
 variable "publish" {

@@ -7,13 +7,13 @@ provider "aws" {
   region  = var.aws_region
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# PREPARE THE DEPLOYMENT PACKAGE
+# ----------------------------------------------------------------------------------------------------------------------
+
 provider "archive" {
   version = "~> 1.3"
 }
-
-# ----------------------------------------------------------------------------------------------------------------------
-# CREATE A ZIP ARCHIVE FROM SOURCES
-# ----------------------------------------------------------------------------------------------------------------------
 
 data "archive_file" "lambda" {
   type        = "zip"
@@ -22,7 +22,22 @@ data "archive_file" "lambda" {
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
-# CREATE THE LAMBDA FUNCTION
+# FETCH DEFAULT VPC DATA AND PASS TO THE LAMBDA FUNCTIONS VPC CONFIG
+# ----------------------------------------------------------------------------------------------------------------------
+
+resource "aws_default_vpc" "default" {
+}
+
+data "aws_subnet_ids" "default" {
+  vpc_id = aws_default_vpc.default.id
+}
+
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_default_vpc.default.id
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
+# DEPLOY THE LAMBDA FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 
 module "lambda" {
@@ -39,12 +54,20 @@ module "lambda" {
   timeout     = var.timeout
   memory_size = var.memory_size
 
-  permissions = {
-    AllowExecutionFromSNS = {
-      principal  = "sns.amazonaws.com"
-      source_arn = aws_sns_topic.lambda.arn
-    }
+  vpc_subnet_ids         = data.aws_subnet_ids.default.ids
+  vpc_security_group_ids = [aws_default_security_group.default.id]
+
+  aliases = {
+    latest = {}
   }
+
+  permissions = [
+    {
+      statement_id = "AllowExecutionFromSNS"
+      principal    = "sns.amazonaws.com"
+      source_arn   = aws_sns_topic.lambda.arn
+    }
+  ]
 
   module_tags = var.module_tags
 }
@@ -77,6 +100,20 @@ module "iam_role" {
     {
       type        = "Service"
       identifiers = ["lambda.amazonaws.com"]
+    }
+  ]
+
+  policy_statements = [
+    {
+      sid = "LambdaVPCAccess"
+
+      actions = [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DetachNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+      ]
+      resources = ["*"]
     }
   ]
 
