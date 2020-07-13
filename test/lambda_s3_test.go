@@ -64,5 +64,4 @@ func TestLambdaS3(t *testing.T) {
 	assert.Equal(t, publish, functionOutputs["publish"])
 	assert.Equal(t, memorySize, functionOutputs["memory_size"])
 	assert.Equal(t, timeout, functionOutputs["timeout"])
-
 }
