@@ -8,8 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//TestModuleEnabled : Tests that no resources are being created
-// when `module_enabled` is set to `false`
+// TestModuleEnabled : Tests that no resources are being created  when `module_enabled` is set to `false`
 func TestModuleEnabled(t *testing.T) {
 	t.Parallel()
 
