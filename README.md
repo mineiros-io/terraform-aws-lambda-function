@@ -43,23 +43,18 @@ are pre-configured.
 
 These are some of our custom features:
 
-- **Default Security Settings**:
-  secure by default by setting security to `true`, additional security can be added by setting some feature to `enabled`
-
 - **Standard Module Features**:
-  Cool Feature of the main resource, tags
+  Deploy a local deployment package to AWS Lambda
+  Deploy a deployment package located in S3 to AWS Lambda
 
 - **Extended Module Features**:
-  Awesome Extended Feature of an additional related resource,
-  and another Cool Feature
-
-- **Additional Features**:
-  a Cool Feature that is not actually a resource but a cool set up from us
+  Aliases, Permissions, VPC Config
 
 - *Features not yet implemented*:
-  Standard Features missing,
-  Extended Features planned,
-  Additional Features planned
+  Event Source Mapping,
+  Event Invoke Config
+  Layer Versions,
+  Provisioned Concurrency Config
 
 ## Getting Started
 
@@ -80,8 +75,8 @@ module "terraform-aws-lambda-function" {
 **Note**: This module expects the ARN of an existing IAM Role through the `role_arn` variable.
 You can consider or [terraform-aws-iam-role] module for easily setting up IAM Roles.
 
-Advanced examples can be found in [examples/s3/main.tf] setting all required and
-optional arguments to their default values.
+Advanced examples can be found in [examples/s3-complete-example/main.tf] setting
+all required and optional arguments to their default values.
 
 ## Module Argument Reference
 
@@ -98,13 +93,14 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 - **`module_tags`**: *(Optional `map(string)`)*
 
-  A map of tags that will be applied to all created resources that accept tags. Tags defined with 'module_tags' can be
-  overwritten by resource-specific tags.
+  A map of tags that will be applied to all created resources that accept tags.
+  Tags defined with 'module_tags' can be overwritten by resource-specific tags.
   Default is `{}`.
 
 - **`module_depends_on`**: *(Optional `list(dependencies)`)*
 
-  A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
+  A list of dependencies. Any object can be _assigned_ to this list to define a
+  hidden external dependency.
 
 #### Lambda Function Resource Configuration
 
@@ -169,12 +165,14 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 - **`layer_arns`**: *(Optional `set(string)`)*
 
-  Set of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html Default is `[]`.
+  Set of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda function.
+  For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+  Default is `[]`.
 
 - **`reserved_concurrent_executions`**: *(Optional `string`)*
 
-  The amount of reserved concurrent executions for this lambda function.
-  A value of 0 disables lambda from being triggered and -1 removes any
+  The amount of reserved concurrent executions for this Lambda function.
+  A value of 0 disables Lambda from being triggered and -1 removes any
   concurrency limitations.
   For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
   Default is `-1`.
@@ -210,7 +208,9 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 - **`timeout`**: *(Optional `number`)*
 
-  The amount of time the Lambda function has to run in seconds. For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html Default is `true`.
+  The amount of time the Lambda function has to run in seconds. For details see
+  https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+  Default is `true`.
 
 - **`dead_letter_config_target_arn`**: *(Optional `string`)*
 
@@ -445,7 +445,7 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [terraform-aws-iam-role]: https://github.com/mineiros-io/terraform-aws-iam-role
 
 <!-- markdown-link-check-disable -->
-[examples/s3/main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/example/main.tf
+[examples/s3-complete-example/main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/s3-complete-example/main.tf
 [variables.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/variables.tf
 [examples/]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples
 [Issues]: https://github.com/mineiros-io/terraform-aws-lambda-function/issues
