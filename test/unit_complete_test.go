@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLambdaFunction(t *testing.T) {
+func TestUnitComplete(t *testing.T) {
 	t.Parallel()
 
 	functionName := strings.ToLower(fmt.Sprintf("lambda-test-%s", random.UniqueId()))
@@ -23,6 +23,8 @@ func TestLambdaFunction(t *testing.T) {
 	memorySize := float64(128)
 	timeout := float64(3)
 
+	s3BucketPrefix := "mineiros-lambda-test-"
+
 	moduleTags := map[string]string{
 		"Name":        functionName,
 		"Environment": "Dev",
@@ -30,16 +32,17 @@ func TestLambdaFunction(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
 		// The path to where the Terraform code is located
-		TerraformDir: "./lambda-python",
+		TerraformDir: "./unit-complete",
 		Vars: map[string]interface{}{
-			"function_name": functionName,
-			"description":   description,
-			"handler":       handler,
-			"runtime":       runtime,
-			"publish":       publish,
-			"memory_size":   memorySize,
-			"timeout":       timeout,
-			"module_tags":   moduleTags,
+			"function_name":    functionName,
+			"description":      description,
+			"s3_bucket_prefix": s3BucketPrefix,
+			"handler":          handler,
+			"runtime":          runtime,
+			"publish":          publish,
+			"memory_size":      memorySize,
+			"timeout":          timeout,
+			"module_tags":      moduleTags,
 		},
 		Upgrade: true,
 	}
