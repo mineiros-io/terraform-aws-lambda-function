@@ -5,7 +5,6 @@
 [![Join Slack][badge-slack]][slack]
 
 # Deploy a Python Function to AWS Lambda
- 
 
 ## Basic usage
 
@@ -17,21 +16,22 @@ terraform, please see the code in the [main.tf] file.
 
 ```hcl
 module "terraform-aws-lambda-function" {
-  source = "git@github.com:mineiros-io/terraform-aws-lambda-function.git?ref=v0.0.1"
+  source  = "mineiros-io/lambda-function/aws"
+  version = "0.0.1"
 
   function_name = "python-function"
   description   = "Example Python Lambda Function that returns an HTTP response."
   filename      = "main.py.zip"
   runtime       = "python3.8"
   handler       = "main.lambda_handler"
- 
+
   timeout     = 30
   memory_size = 128
 
   role_arn = aws_iam_role.lambda.arn
 
   module_tags = {
-    Environment = "dev"
+    Environment = "Dev"
   }
 }
 ```
