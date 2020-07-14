@@ -30,8 +30,9 @@ data "archive_file" "lambda" {
 # DEPLOY THE LAMBDA FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 
-module "terraform-aws-lambda-function" {
-  source = "git@github.com:mineiros-io/terraform-aws-lambda-function.git?ref=v0.0.1"
+module "lambda-function" {
+  source  = "mineiros-io/lambda-function/aws"
+  version = "0.0.1"
 
   function_name = "python-function"
   description   = "Example Python Lambda function that returns an HTTP response."
@@ -44,7 +45,7 @@ module "terraform-aws-lambda-function" {
   role_arn = module.iam_role.role.arn
 
   module_tags = {
-    Environment = "dev"
+    Environment = "Dev"
   }
 }
 
@@ -65,5 +66,7 @@ module "iam_role" {
     }
   ]
 
-  tags = {}
+  tags = {
+    Environment = "Dev"
+  }
 }

@@ -4,34 +4,54 @@
 [![Terraform Version][badge-terraform]][releases-terraform]
 [![Join Slack][badge-slack]][slack]
 
-# Deploy a Python Function to AWS Lambda
+# Deploy a Python Deployment Package that is located in S3 to AWS Lambda
 
 ## Basic usage
 
-The code in [main.tf] shows how to deploy a Python function to AWS Lambda.
-Since each Lambda function requires an attached Execution Role, we also
-deploy a new IAM Role and attach it to the function. The example expects a
-zip archive that already exists. If you'd like to build the archive through
-terraform, please see the code in the [main.tf] file.
+The code in [main.tf] shows how to deploy a deployment package that is located
+in S3 to AWS Lambda. Since each Lambda function requires an attached Execution Role, we also
+deploy a new IAM Role and attach it to the function. The configuration creates an
+alias, VPC config and permissions also.
+For details please see the code in the [main.tf] file.
 
 ```hcl
-module "terraform-aws-lambda-function" {
+module "lambda" {
   source  = "mineiros-io/lambda-function/aws"
   version = "0.0.1"
 
-  function_name = "python-function"
-  description   = "Example Python Lambda Function that returns an HTTP response."
-  filename      = "main.py.zip"
-  runtime       = "python3.8"
-  handler       = "main.lambda_handler"
+  function_name = "mineiros-s3-lambda-example"
+  description   = "This is a simple Lambda Function that has its deployment package located in a S3 bucket."
 
-  timeout     = 30
+  runtime  = "python3.8"
+  handler  = "min.lambda_handler"
+  role_arn = module.iam_role.role.arn
+  publish  = true
+
+  s3_bucket = aws_s3_bucket_object.function.bucket
+  s3_key    = aws_s3_bucket_object.function.key
+
+  timeout     = 3
   memory_size = 128
 
-  role_arn = aws_iam_role.lambda.arn
+  vpc_subnet_ids         = data.aws_subnet_ids.default.ids
+  vpc_security_group_ids = [aws_default_security_group.default.id]
+
+  aliases = {
+    latest = {
+      description = "The latest deployed version."
+    }
+  }
+
+  permissions = [
+    {
+      statement_id = "AllowExecutionFromSNS"
+      principal    = "sns.amazonaws.com"
+      source_arn   = aws_sns_topic.lambda.arn
+    }
+  ]
 
   module_tags = {
-    Environment = "Dev"
+    Environment = "Test"
   }
 }
 ```
@@ -42,7 +62,7 @@ module "terraform-aws-lambda-function" {
 
 ``` bash
 git clone https://github.com/mineiros-io/terraform-aws-lambda-function.git
-cd terraform-aws-lambda-function/examples/python-function
+cd terraform-aws-lambda-function/examples/s3-complete-example
 ```
 
 ### Initializing Terraform
@@ -64,7 +84,7 @@ Run `terraform destroy` to destroy all resources again.
 
 <!-- References -->
 <!-- markdown-link-check-disable -->
-[main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/python-function/main.tf
+[main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/s3-complete-example/main.tf
 <!-- markdown-link-check-enable -->
 
 [homepage]: https://mineiros.io/?ref=terraform-aws-lambda-function

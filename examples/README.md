@@ -7,11 +7,14 @@
 
 # Examples for using this Mineiros module
 
-- [example/] Create a Resource.
+- [examples/python-function] Deploys a simple Python function to AWS Lambda.
+- [examples/s3-complete-example] Creates a S3 bucket and uploads a deployment package as an object to it. Deploys a
+  Lambda Function that uses the S3 Object as a deployment package. Creates a Lambda alias and permissions for SNS.
 
 <!-- References -->
 <!-- markdown-link-check-disable -->
-[example/]: https://github.com/mineiros-io/terraform-module-template/blob/master/examples/example
+[examples/python-function]: https://github.com/mineiros-io/terraform-module-template/blob/master/examples/python-function
+[examples/s3-complete-example]: https://github.com/mineiros-io/terraform-module-template/blob/master/examples/s3-complete-example
 <!-- markdown-link-check-enable -->
 
 [homepage]: https://mineiros.io/?ref=terraform-module-template
