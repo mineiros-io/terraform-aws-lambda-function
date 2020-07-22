@@ -25,15 +25,16 @@ data "archive_file" "lambda" {
 # FETCH DEFAULT VPC DATA AND PASS TO THE LAMBDA FUNCTIONS VPC CONFIG
 # ----------------------------------------------------------------------------------------------------------------------
 
-resource "aws_default_vpc" "default" {
+data "aws_vpc" "default" {
+  default = true
 }
 
 data "aws_subnet_ids" "default" {
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = data.aws_vpc.default.id
 }
 
 resource "aws_default_security_group" "default" {
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = data.aws_vpc.default.id
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
