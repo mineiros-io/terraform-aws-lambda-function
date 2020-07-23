@@ -421,18 +421,14 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [homepage]: https://mineiros.io/?ref=terraform-aws-lambda-function
 [hello@mineiros.io]: mailto:hello@mineiros.io
 
-<!-- markdown-link-check-disable -->
 [badge-build]: https://github.com/mineiros-io/terraform-aws-lambda-function/workflows/CI/CD%20Pipeline/badge.svg
-<!-- markdown-link-check-enable -->
 [badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-aws-lambda-function.svg?label=latest&sort=semver
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
 [badge-terraform]: https://img.shields.io/badge/terraform-0.13%20and%200.12.20+-623CE4.svg?logo=terraform
 [badge-slack]: https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack
 
-<!-- markdown-link-check-disable -->
 [build-status]: https://github.com/mineiros-io/terraform-aws-lambda-function/actions
 [releases-github]: https://github.com/mineiros-io/terraform-aws-lambda-function/releases
-<!-- markdown-link-check-enable -->
 [releases-terraform]: https://github.com/hashicorp/terraform/releases
 [apache20]: https://opensource.org/licenses/Apache-2.0
 [slack]: https://join.slack.com/t/mineiros-community/shared_invite/zt-ehidestg-aLGoIENLVs6tvwJ11w9WGg
@@ -444,7 +440,6 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 
 [terraform-aws-iam-role]: https://github.com/mineiros-io/terraform-aws-iam-role
 
-<!-- markdown-link-check-disable -->
 [examples/s3-complete-example/main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/s3-complete-example/main.tf
 [variables.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/variables.tf
 [examples/]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples
@@ -453,4 +448,3 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [Makefile]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/Makefile
 [Pull Requests]: https://github.com/mineiros-io/terraform-aws-lambda-function/pulls
 [Contribution Guidelines]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/CONTRIBUTING.md
-<!-- markdown-link-check-enable -->
