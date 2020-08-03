@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 provider "aws" {
-  version = "~> 2.45"
+  version = "~> 3.0"
   region  = var.aws_region
 }
 
@@ -93,7 +93,7 @@ resource "aws_sns_topic_subscription" "lambda" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "0.0.2"
+  version = "~> 0.2.0"
 
   name = var.function_name
 
