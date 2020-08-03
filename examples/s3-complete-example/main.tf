@@ -47,7 +47,7 @@ resource "aws_default_security_group" "default" {
 
 module "s3_bucket" {
   source  = "mineiros-io/s3-bucket/aws"
-  version = "~> 0.2.1"
+  version = "~> 0.3.0"
 
   bucket_prefix = "mineiros-s3-example-"
   force_destroy = true
@@ -125,7 +125,7 @@ resource "aws_sns_topic_subscription" "lambda" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "0.0.2"
+  version = "~> 0.2.0"
 
   name = "mineiros-s3-lambda-example"
 

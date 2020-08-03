@@ -6,7 +6,7 @@
 
 provider "aws" {
   region  = var.aws_region
-  version = "~> 2.45"
+  version = "~> 3.0"
 }
 
 module "test" {
