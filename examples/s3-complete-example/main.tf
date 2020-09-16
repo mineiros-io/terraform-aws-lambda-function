@@ -126,7 +126,7 @@ resource "aws_sns_topic_subscription" "lambda" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.3.0"
 
   name = "mineiros-s3-lambda-example"
 
