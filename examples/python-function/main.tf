@@ -7,12 +7,13 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 provider "aws" {
-  version = "~> 2.0"
-  region  = "us-east-1"
+  region = "us-east-1"
 }
 
-provider "archive" {
-  version = "~> 1.3"
+terraform {
+  required_providers {
+    archive = "~> 1.3"
+  }
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -32,7 +33,7 @@ data "archive_file" "lambda" {
 
 module "lambda-function" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.1.0"
+  version = "~> 0.2.0"
 
   function_name = "python-function"
   description   = "Example Python Lambda function that returns an HTTP response."
@@ -55,7 +56,7 @@ module "lambda-function" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.3.0"
 
   name = "python-function"
 

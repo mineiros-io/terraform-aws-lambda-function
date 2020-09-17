@@ -7,12 +7,13 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 provider "aws" {
-  version = "~> 2.45"
-  region  = "us-east-1"
+  region = "us-east-1"
 }
 
-provider "archive" {
-  version = "~> 1.3"
+terraform {
+  required_providers {
+    archive = "~> 1.3"
+  }
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -125,7 +126,7 @@ resource "aws_sns_topic_subscription" "lambda" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.3.0"
 
   name = "mineiros-s3-lambda-example"
 

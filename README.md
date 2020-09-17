@@ -63,7 +63,7 @@ Most basic usage just setting required arguments:
 ```hcl
 module "terraform-aws-lambda-function" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.1.0"
+  version = "~> 0.2.0"
 
   runtime  = "python3.8"
   handler  = "main"

@@ -3,12 +3,13 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 provider "aws" {
-  version = "~> 3.0"
-  region  = var.aws_region
+  region = var.aws_region
 }
 
-provider "archive" {
-  version = "~> 1.3"
+terraform {
+  required_providers {
+    archive = "~> 1.3"
+  }
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ data "archive_file" "lambda" {
 
 module "s3_bucket" {
   source  = "mineiros-io/s3-bucket/aws"
-  version = "~> 0.3.0"
+  version = "~> 0.4.0"
 
   bucket_prefix = var.s3_bucket_prefix
   force_destroy = var.s3_force_destroy
@@ -68,7 +69,7 @@ module "lambda" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.3.0"
 
   name = var.function_name
 

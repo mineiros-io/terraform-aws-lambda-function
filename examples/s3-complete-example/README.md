@@ -17,7 +17,7 @@ For details please see the code in the [main.tf] file.
 ```hcl
 module "lambda" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.1.0"
+  version = "~> 0.2.0"
 
   function_name = "mineiros-s3-lambda-example"
   description   = "This is a simple Lambda Function that has its deployment package located in a S3 bucket."
