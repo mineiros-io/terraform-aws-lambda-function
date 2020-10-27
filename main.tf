@@ -113,27 +113,25 @@ resource "aws_lambda_alias" "alias" {
 
 locals {
   permissions = {
-    for permission in var.permissions : permission.statement_id => {
-      statement_id       = permission.statement_id
-      action             = try(permission.action, "lambda:InvokeFunction")
-      event_source_token = try(permission.event_source_token, null)
-      principal          = permission.principal
-      qualifier          = try(permission.qualifier, null)
-      source_account     = try(permission.source_account, null)
-      source_arn         = permission.source_arn
-    }
+    for idx, permission in var.permissions : permission.statement_id => idx
   }
 }
 
 resource "aws_lambda_permission" "permission" {
   for_each = var.module_enabled ? local.permissions : {}
 
-  action             = each.value.action
-  event_source_token = each.value.event_source_token
-  function_name      = aws_lambda_function.lambda[0].function_name
-  principal          = each.value.principal
-  qualifier          = each.value.qualifier
-  statement_id       = each.key
-  source_account     = each.value.source_account
-  source_arn         = each.value.source_arn
+  function_name = aws_lambda_function.lambda[0].function_name
+
+  # required
+  statement_id = each.key
+  principal    = var.permissions[each.value].principal
+  source_arn   = var.permissions[each.value].source_arn
+
+  # optional with fixed default
+  action = try(var.permissions[each.value].action, "lambda:InvokeFunction")
+
+  # optional
+  event_source_token = try(var.permissions[each.value].event_source_token, null)
+  qualifier          = try(var.permissions[each.value].qualifier, null)
+  source_account     = try(var.permissions[each.value].source_account, null)
 }
