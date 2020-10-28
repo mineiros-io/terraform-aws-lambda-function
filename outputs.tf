@@ -16,10 +16,10 @@ output "aliases" {
   value       = try(aws_lambda_alias.alias, null)
 }
 
-output "permissions" {
-  description = "A map of all created 'aws_lambda_permission' resources keyed by statement_id."
-  value       = try(aws_lambda_permission.permission, null)
-}
+# output "permissions" {
+#   description = "A map of all created 'aws_lambda_permission' resources keyed by statement_id."
+#   value       = try(aws_lambda_permission.permission, null)
+# }
 
 # ----------------------------------------------------------------------------------------------------------------------
 # OUTPUT ALL INPUT VARIABLES
