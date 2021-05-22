@@ -42,7 +42,7 @@ resource "aws_lambda_function" "lambda" {
 
   kms_key_arn = var.kms_key_arn
 
-  dynamic environment {
+  dynamic "environment" {
     for_each = length(var.environment_variables) > 0 ? [true] : []
 
     content {
@@ -50,7 +50,7 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
-  dynamic dead_letter_config {
+  dynamic "dead_letter_config" {
     for_each = length(var.dead_letter_config_target_arn) > 0 ? [true] : []
 
     content {
@@ -63,7 +63,7 @@ resource "aws_lambda_function" "lambda" {
     subnet_ids         = var.vpc_subnet_ids
   }
 
-  dynamic tracing_config {
+  dynamic "tracing_config" {
     for_each = var.tracing_mode != null ? [true] : []
 
     content {
@@ -98,7 +98,7 @@ resource "aws_lambda_alias" "alias" {
   function_name    = aws_lambda_function.lambda[0].function_name
   function_version = each.value.version
 
-  dynamic routing_config {
+  dynamic "routing_config" {
     for_each = length(each.value.additional_version_weights) > 0 ? [true] : []
 
     content {
