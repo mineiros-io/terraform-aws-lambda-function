@@ -56,7 +56,7 @@ module "lambda-function" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.3.0"
+  version = "~> 0.5.0"
 
   name = "python-function"
 
