@@ -5,9 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- feat: add support for Terraform `v0.14`
 
 ### Change
 - feat: upgrade pre-commit hooks to `v0.2.3`
+- feat: upgrade build-tools to `v0.8.0`
 
 ## [0.2.0]
 ### Added
