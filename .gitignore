@@ -49,5 +49,8 @@ vendor
 # Terraform crash log files
 crash.log
 
+.terraform.lock.hcl
+.tool-versions
+
 # Generated Deployment Package
 main.py.zip
