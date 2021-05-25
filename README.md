@@ -11,7 +11,7 @@
 A [Terraform] module for deploying and managing [Serverless Lambda Functions]
 on [Amazon Web Services (AWS)][AWS].
 
-***This module supports both, Terraform v0.14, v0.13 as well as v0.12.20 and above.***
+***This module supports both, Terraform v0.15, v0.14, v0.13 as well as v0.12.20 and above.***
 
 This module is part of our Infrastructure as Code (IaC) framework
 that enables our users and customers to easily deploy and manage reusable,
@@ -63,7 +63,7 @@ Most basic usage just setting required arguments:
 ```hcl
 module "terraform-aws-lambda-function" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.3.0"
+  version = "~> 0.4.0"
 
   runtime  = "python3.8"
   handler  = "main"
@@ -424,7 +424,7 @@ Copyright &copy; 2020 [Mineiros GmbH][homepage]
 [badge-build]: https://github.com/mineiros-io/terraform-aws-lambda-function/workflows/CI/CD%20Pipeline/badge.svg
 [badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-aws-lambda-function.svg?label=latest&sort=semver
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
-[badge-terraform]: https://img.shields.io/badge/terraform-0.14%20|%200.13%20|%200.12.20+-623CE4.svg?logo=terraform
+[badge-terraform]: https://img.shields.io/badge/terraform-0.15%20|%200.14%20|%200.13%20|%200.12.20+-623CE4.svg?logo=terraform
 [badge-slack]: https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack
 
 [build-status]: https://github.com/mineiros-io/terraform-aws-lambda-function/actions
