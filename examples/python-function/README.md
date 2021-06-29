@@ -17,7 +17,7 @@ terraform, please see the code in the [main.tf] file.
 ```hcl
 module "terraform-aws-lambda-function" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.3.0"
+  version = "~> 0.4.0"
 
   function_name = "python-function"
   description   = "Example Python Lambda Function that returns an HTTP response."
@@ -67,7 +67,7 @@ Run `terraform destroy` to destroy all resources again.
 [main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/python-function/main.tf
 [homepage]: https://mineiros.io/?ref=terraform-aws-lambda-function
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
-[badge-terraform]: https://img.shields.io/badge/terraform-0.13%20and%200.12.20+-623CE4.svg?logo=terraform
+[badge-terraform]: https://img.shields.io/badge/terraform-0.15%20|%200.14%20|%200.13%20|%200.12.20+-623CE4.svg?logo=terraform
 [badge-slack]: https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack
 [releases-terraform]: https://github.com/hashicorp/terraform/releases
 [apache20]: https://opensource.org/licenses/Apache-2.0

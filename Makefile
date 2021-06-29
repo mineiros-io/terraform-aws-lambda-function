@@ -1,7 +1,7 @@
 # Set default shell to bash
 SHELL := /bin/bash -o pipefail
 
-BUILD_TOOLS_VERSION      ?= v0.7.2
+BUILD_TOOLS_VERSION      ?= v0.11.0
 BUILD_TOOLS_DOCKER_REPO  ?= mineiros/build-tools
 BUILD_TOOLS_DOCKER_IMAGE ?= ${BUILD_TOOLS_DOCKER_REPO}:${BUILD_TOOLS_VERSION}
 
@@ -33,7 +33,7 @@ endif
 GIT_TOPLEVEl = $(shell git rev-parse --show-toplevel)
 
 # generic docker run flags
-DOCKER_RUN_FLAGS += -v ${GIT_TOPLEVEl}:/app/src
+DOCKER_RUN_FLAGS += -v ${GIT_TOPLEVEl}:/build
 DOCKER_RUN_FLAGS += --rm
 DOCKER_RUN_FLAGS += -e TF_IN_AUTOMATION
 
@@ -80,6 +80,7 @@ test/pre-commit:
 test/unit-tests: DOCKER_FLAGS += ${DOCKER_SSH_FLAGS}
 test/unit-tests: DOCKER_FLAGS += ${DOCKER_GITHUB_FLAGS}
 test/unit-tests: DOCKER_FLAGS += ${DOCKER_AWS_FLAGS}
+test/unit-tests: DOCKER_FLAGS += -e TF_DATA_DIR=.terratest
 test/unit-tests: TEST ?= "TestUnit"
 test/unit-tests:
 	@echo "${YELLOW}[TEST] ${GREEN}Start Running Go Tests in Docker Container.${RESET}"
