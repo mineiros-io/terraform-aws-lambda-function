@@ -72,7 +72,7 @@ module "lambda" {
   description   = "This is a simple Lambda Function that has its deployment package located in a S3 bucket."
 
   runtime  = "python3.8"
-  handler  = "min.lambda_handler"
+  handler  = "main.lambda_handler"
   role_arn = module.iam_role.role.arn
   publish  = true
 
