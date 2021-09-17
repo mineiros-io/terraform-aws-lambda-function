@@ -24,7 +24,7 @@ linters:
     - goimports
     - gosec
     - gosimple
-    - golint
+    - revive
     - govet
     - ineffassign
     - interfacer
@@ -43,7 +43,7 @@ linters:
 
 linters-settings:
   errcheck:
-    # report about assignment of errors to blank identifier: `num, _ := strconv.Atoi(numStr)`;
+    # report about assignment of errors to blank identifier: `num, _ := strcnv.Atoi(numStr)`;
     # default is false: such cases aren't reported by default.
     check-blank: true
     ignore: fmt:.*,[rR]ead|[wW]rite|[cC]lose,io:Copy
