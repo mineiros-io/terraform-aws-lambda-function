@@ -17,7 +17,7 @@ terraform, please see the code in the [main.tf] file.
 ```hcl
 module "terraform-aws-lambda-function" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.4.0"
+  version = "~> 0.5.0"
 
   function_name = "python-function"
   description   = "Example Python Lambda Function that returns an HTTP response."

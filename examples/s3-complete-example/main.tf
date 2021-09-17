@@ -66,7 +66,7 @@ resource "aws_s3_bucket_object" "function" {
 
 module "lambda" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.4.0"
+  version = "~> 0.5.0"
 
   function_name = "mineiros-s3-lambda-example"
   description   = "This is a simple Lambda Function that has its deployment package located in a S3 bucket."
