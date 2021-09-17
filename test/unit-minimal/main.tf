@@ -94,7 +94,7 @@ resource "aws_sns_topic_subscription" "lambda" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.5.0"
+  version = "~> 0.6.0"
 
   name = var.function_name
 

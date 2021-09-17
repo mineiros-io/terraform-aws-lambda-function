@@ -33,7 +33,7 @@ data "archive_file" "lambda" {
 
 module "lambda-function" {
   source  = "mineiros-io/lambda-function/aws"
-  version = "~> 0.4.0"
+  version = "~> 0.5.0"
 
   function_name = "python-function"
   description   = "Example Python Lambda function that returns an HTTP response."
@@ -56,7 +56,7 @@ module "lambda-function" {
 
 module "iam_role" {
   source  = "mineiros-io/iam-role/aws"
-  version = "~> 0.5.0"
+  version = "~> 0.6.0"
 
   name = "python-function"
 
