@@ -1,7 +1,7 @@
 # Set default shell to bash
 SHELL := /bin/bash -o pipefail
 
-BUILD_TOOLS_VERSION      ?= v0.11.0
+BUILD_TOOLS_VERSION      ?= v0.13.0
 BUILD_TOOLS_DOCKER_REPO  ?= mineiros/build-tools
 BUILD_TOOLS_DOCKER_IMAGE ?= ${BUILD_TOOLS_DOCKER_REPO}:${BUILD_TOOLS_VERSION}
 
@@ -32,29 +32,36 @@ endif
 
 GIT_TOPLEVEl = $(shell git rev-parse --show-toplevel)
 
-# generic docker run flags
+# Generic docker run flags
 DOCKER_RUN_FLAGS += -v ${GIT_TOPLEVEl}:/build
 DOCKER_RUN_FLAGS += --rm
 DOCKER_RUN_FLAGS += -e TF_IN_AUTOMATION
+# If TF_VERSION is defined, TFSwitch will switch to the desired version on
+# container startup. If TF_VERSION is omitted, the default version installed
+# inside the docker image will be used.
+DOCKER_RUN_FLAGS += -e TF_VERSION
 
-# if SSH_AUTH_SOCK is defined we are likely referencing private repositories
-# for depending terrfaorm modules or other depdendencies
-# so we pass credentials to the docker container when running tests or pre-commit hooks
+# If SSH_AUTH_SOCK is set, we forward the SSH agent of the host system into
+# the docker container. This is useful when working with private repositories
+# and dependencies that might need to be cloned inside the container (e.g.
+# private Terraform modules).
 ifdef SSH_AUTH_SOCK
   DOCKER_SSH_FLAGS += -e SSH_AUTH_SOCK=/ssh-agent
   DOCKER_SSH_FLAGS += -v ${SSH_AUTH_SOCK}:/ssh-agent
 endif
 
-# if AWS_ACCESS_KEY_ID is defined we are likely running inside an AWS provider module
-# so we pass credentials to the docker container when running tests
+# If AWS_ACCESS_KEY_ID is defined, we are likely running inside an AWS provider
+# module. To enable AWS authentication inside the docker container, we inject
+# the relevant environment variables.
 ifdef AWS_ACCESS_KEY_ID
   DOCKER_AWS_FLAGS += -e AWS_ACCESS_KEY_ID
   DOCKER_AWS_FLAGS += -e AWS_SECRET_ACCESS_KEY
   DOCKER_AWS_FLAGS += -e AWS_SESSION_TOKEN
 endif
 
-# if GITHUB_OWNER is defined we are running inside a github provider module
-# so we pass credentials to the docker container when running tests
+# If GITHUB_OWNER is defined, we are likely running inside a GitHub provider
+# module. To enable GitHub authentication inside the docker container,
+# we inject the relevant environment variables.
 ifdef GITHUB_OWNER
   DOCKER_GITHUB_FLAGS += -e GITHUB_TOKEN
   DOCKER_GITHUB_FLAGS += -e GITHUB_OWNER
@@ -109,7 +116,7 @@ help:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 
-# define helper functions
+# Define helper functions
 DOCKER_FLAGS   += ${DOCKER_RUN_FLAGS}
 DOCKER_RUN_CMD  = docker run ${DOCKER_FLAGS} ${BUILD_TOOLS_DOCKER_IMAGE}
 
