@@ -193,13 +193,13 @@ For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layer
 
   Default is `[]`.
 
-- [**`reserved_concurrent_executions`**](#var-reserved_concurrent_executions): *(Optional `string`)*<a name="var-reserved_concurrent_executions"></a>
+- [**`reserved_concurrent_executions`**](#var-reserved_concurrent_executions): *(Optional `number`)*<a name="var-reserved_concurrent_executions"></a>
 
   The amount of reserved concurrent executions for this Lambda function.
 A value of 0 disables Lambda from being triggered and -1 removes any concurrency limitations.
 For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
 
-  Default is `"-1"`.
+  Default is `-1`.
 
 - [**`s3_bucket`**](#var-s3_bucket): *(Optional `string`)*<a name="var-s3_bucket"></a>
 

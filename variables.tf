@@ -93,8 +93,8 @@ variable "publish" {
 
 variable "reserved_concurrent_executions" {
   description = "(Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html"
-  type        = string
-  default     = "-1"
+  type        = number
+  default     = -1
 }
 
 variable "role_arn" {

@@ -256,8 +256,8 @@ section {
         }
 
         variable "reserved_concurrent_executions" {
-          type        = string
-          default     = "-1"
+          type        = number
+          default     = -1
           description = <<-END
             The amount of reserved concurrent executions for this Lambda function.
             A value of 0 disables Lambda from being triggered and -1 removes any concurrency limitations.
