@@ -404,9 +404,9 @@ Run `make help` to see details on each available target.
 
 ## License
 
+[![license][badge-license]][apache20]
 This module is licensed under the Apache License Version 2.0, January 2004.
 Please see [LICENSE] for full details.
-
 Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 
 
