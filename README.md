@@ -31,7 +31,7 @@ secure, and production-grade cloud infrastructure.
   - [Backwards compatibility in `0.0.z` and `0.y.z` version](#backwards-compatibility-in-00z-and-0yz-version)
 - [About Mineiros](#about-mineiros)
 - [Reporting Issues](#reporting-issues)
-- [Contributing](#contributing)
+- [License](#license)
 - [Makefile Targets](#makefile-targets)
 - [License](#license)
 
@@ -392,10 +392,14 @@ if you have any questions or need help. Feel free to email us at [hello@mineiros
 
 We use GitHub [Issues] to track community reported issues and missing features.
 
-## Contributing
+## License
 
-Contributions are always encouraged and welcome! For the process of accepting changes, we use
-[Pull Requests]. If you'd like more information, please see our [Contribution Guidelines].
+[![license][badge-license]][apache20]
+
+This module is licensed under the Apache License Version 2.0, January 2004.
+Please see [LICENSE] for full details.
+      
+Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 
 ## Makefile Targets
 
