@@ -1,15 +1,14 @@
-[<img src="https://raw.githubusercontent.com/mineiros-io/brand/3bffd30e8bdbbde32c143e2650b2faa55f1df3ea/mineiros-primary-logo.svg" width="400"/>][homepage]
+[<img src="https://raw.githubusercontent.com/mineiros-io/brand/3bffd30e8bdbbde32c143e2650b2faa55f1df3ea/mineiros-primary-logo.svg" width="400"/>](https://mineiros.io/?ref=terraform-aws-lambda-function)
 
-[![Build Status][badge-build]][build-status]
-[![GitHub tag (latest SemVer)][badge-semver]][releases-github]
-[![license][badge-license]][apache20]
-[![Terraform Version][badge-terraform]][releases-terraform]
-[![Join Slack][badge-slack]][slack]
+[![Build Status](https://github.com/mineiros-io/terraform-aws-lambda-function/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/mineiros-io/terraform-aws-lambda-function/actions)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mineiros-io/terraform-aws-lambda-function.svg?label=latest&sort=semver)](https://github.com/mineiros-io/terraform-aws-lambda-function/releases)
+[![Terraform Version](https://img.shields.io/badge/terraform-1.x%20|%200.15%20|%200.14%20|%200.13%20|%200.12.20+-623CE4.svg?logo=terraform)](https://github.com/hashicorp/terraform/releases)
+[![AWS Provider Version](https://img.shields.io/badge/AWS-3-F8991D.svg?logo=terraform)](https://github.com/terraform-providers/terraform-provider-aws/releases)
+[![Join Slack](https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack)](https://mineiros.io/slack)
 
 # terraform-aws-lambda-function
 
-A [Terraform] module for deploying and managing [Serverless Lambda Functions]
-on [Amazon Web Services (AWS)][AWS].
+A [Terraform] module for deploying and managing [Serverless Lambda Functions] on [Amazon Web Services (AWS)][AWS].
 
 ***This module supports both, Terraform v1.x, v0.15, v0.14, v0.13 as well as v0.12.20 and above.***
 
@@ -17,23 +16,22 @@ This module is part of our Infrastructure as Code (IaC) framework
 that enables our users and customers to easily deploy and manage reusable,
 secure, and production-grade cloud infrastructure.
 
+
 - [Module Features](#module-features)
 - [Getting Started](#getting-started)
 - [Module Argument Reference](#module-argument-reference)
   - [Top-level Arguments](#top-level-arguments)
     - [Module Configuration](#module-configuration)
     - [Lambda Function Resource Configuration](#lambda-function-resource-configuration)
-    - [Alias Resource Configuration](#alias-resource-configuration)
-    - [Permission Resource Configuration](#permission-resource-configuration)
-- [Module Attributes Reference](#module-attributes-reference)
+- [Module Outputs](#module-outputs)
 - [External Documentation](#external-documentation)
+  - [AWS Lambda Documentation](#aws-lambda-documentation)
+  - [Terraform AWS Provider Documentation](#terraform-aws-provider-documentation)
 - [Module Versioning](#module-versioning)
   - [Backwards compatibility in `0.0.z` and `0.y.z` version](#backwards-compatibility-in-00z-and-0yz-version)
 - [About Mineiros](#about-mineiros)
 - [Reporting Issues](#reporting-issues)
-- [Contributing](#contributing)
 - [Makefile Targets](#makefile-targets)
-- [License](#license)
 
 ## Module Features
 
@@ -86,49 +84,50 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 #### Module Configuration
 
-- **`module_enabled`**: *(Optional `bool`)*
+- [**`module_enabled`**](#var-module_enabled): *(Optional `bool`)*<a name="var-module_enabled"></a>
 
   Specifies whether resources in the module will be created.
+
   Default is `true`.
 
-- **`module_tags`**: *(Optional `map(string)`)*
+- [**`module_tags`**](#var-module_tags): *(Optional `map(string)`)*<a name="var-module_tags"></a>
 
   A map of tags that will be applied to all created resources that accept tags.
-  Tags defined with 'module_tags' can be overwritten by resource-specific tags.
+Tags defined with 'module_tags' can be overwritten by resource-specific tags.
+
   Default is `{}`.
 
-- **`module_depends_on`**: *(Optional `list(dependencies)`)*
+- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependencies)`)*<a name="var-module_depends_on"></a>
 
-  A list of dependencies. Any object can be _assigned_ to this list to define a
-  hidden external dependency.
+  A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
 
 #### Lambda Function Resource Configuration
 
-- **`function_name`**: **(Required `string`)**
+- [**`function_name`**](#var-function_name): *(**Required** `string`)*<a name="var-function_name"></a>
 
   A unique name for the Lambda function.
 
-- **`handler`**: **(Required `string`)**
+- [**`handler`**](#var-handler): *(Optional `string`)*<a name="var-handler"></a>
 
-  The function entrypoint in the code. This is the name of the method in the
-  code which receives the event and context parameter when this Lambda function
-  is triggered.
+  The function entrypoint in the code. This is the name of the method in the code which receives the event and context parameter when this Lambda function is triggered.
 
-- **`role_arn`**: **(Required `string`)**
+- [**`role_arn`**](#var-role_arn): *(**Required** `string`)*<a name="var-role_arn"></a>
 
-  The ARN of the policy that is used to set the permissions boundary for the IAM
-  role for the Lambda function.
+  The ARN of the policy that is used to set the permissions boundary for the IAM role for the Lambda function.
 
-- **`runtime`**: **(Required `string`)**
+- [**`runtime`**](#var-runtime): *(**Required** `string`)*<a name="var-runtime"></a>
 
-  The runtime the Lambda function should run in. A list of all available runtimes
-  can be found here: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+  The runtime the Lambda function should run in. A list of all available runtimes can be found here: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
 
-- **[`aliases`](#alias-resource-configuration)**: *(Optional `map(name => alias))`)*
+  Default is `"[]"`.
 
-  A map of aliases (keyed by the alias name) that will be created for the Lambda
-  function. If `version` is omitted, the alias will automatically point
-  to `$LATEST`. Default is `[]`.
+- [**`aliases`**](#var-aliases): *(Optional `map(name => alias))`)*<a name="var-aliases"></a>
+
+  A map of aliases (keyed by the alias name) that will be created for the Lambda function. If `version` is omitted, the alias will automatically point to `$LATEST`.
+
+  Default is `{}`.
+
+  Example:
 
   ```hcl
   aliases = {
@@ -145,107 +144,126 @@ See [variables.tf] and [examples/] for details and use-cases.
   }
   ```
 
-- **`description`**: *(Optional `string`)*
+  The object accepts the following attributes:
 
-  A description of what the Lambda function does. Default is `null`.
+  - [**`description`**](#attr-description-aliases): *(Optional `string`)*<a name="attr-description-aliases"></a>
 
-- **`publish`**: *(Optional `bool`)*
+    Description of the alias.
+
+  - [**`function_version`**](#attr-function_version-aliases): *(Optional `string`)*<a name="attr-function_version-aliases"></a>
+
+    Lambda function version for which you are creating the alias.
+    Pattern: `(\$LATEST|[0-9]+)`.
+
+    Default is `"$LATEST"`.
+
+  - [**`additional_version_weights`**](#attr-additional_version_weights-aliases): *(Optional `map(string)`)*<a name="attr-additional_version_weights-aliases"></a>
+
+    A map that defines the proportion of events that should be sent to different versions of a lambda function.
+
+- [**`description`**](#var-description): *(Optional `string`)*<a name="var-description"></a>
+
+  A description of what the Lambda function does.
+
+- [**`publish`**](#var-publish): *(Optional `bool`)*<a name="var-publish"></a>
 
   Whether to publish creation/change as new Lambda function.
-  This allows you to use aliases to refer to execute different versions of the
-  function in different environments. Default is `false`.
+This allows you to use aliases to refer to execute different versions of the function in different environments.
 
-- **`function_tags`**: *(Optional `map(string)`)*
+  Default is `false`.
 
-  A map of tags that will be applied to the function. Default is `{}`.
+- [**`function_tags`**](#var-function_tags): *(Optional `map(string)`)*<a name="var-function_tags"></a>
 
-- **`vpc_subnet_ids`**: *(Optional `set(string)`)*
+  A map of tags that will be applied to the function.
 
-  A set of subnet IDs associated with the Lambda function. Default is `[]`.
+  Default is `{}`.
 
-- **`layer_arns`**: *(Optional `set(string)`)*
+- [**`vpc_subnet_ids`**](#var-vpc_subnet_ids): *(Optional `set(string)`)*<a name="var-vpc_subnet_ids"></a>
+
+  A set of subnet IDs associated with the Lambda function.
+
+  Default is `[]`.
+
+- [**`layer_arns`**](#var-layer_arns): *(Optional `set(string)`)*<a name="var-layer_arns"></a>
 
   Set of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda function.
-  For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
   Default is `[]`.
 
-- **`reserved_concurrent_executions`**: *(Optional `string`)*
+- [**`reserved_concurrent_executions`**](#var-reserved_concurrent_executions): *(Optional `number`)*<a name="var-reserved_concurrent_executions"></a>
 
   The amount of reserved concurrent executions for this Lambda function.
-  A value of 0 disables Lambda from being triggered and -1 removes any
-  concurrency limitations.
-  For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
+A value of 0 disables Lambda from being triggered and -1 removes any concurrency limitations.
+For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
+
   Default is `-1`.
 
-- **`s3_bucket`**: *(Optional `string`)*
+- [**`s3_bucket`**](#var-s3_bucket): *(Optional `string`)*<a name="var-s3_bucket"></a>
 
   The S3 bucket location containing the function's deployment package.
-  Conflicts with `filename`. This bucket must reside in the same AWS region
-  where you are creating the Lambda function. Default is `null`.
+Conflicts with `filename`. This bucket must reside in the same AWS region where you are creating the Lambda function.
 
-- **`source_code_hash`**: *(Optional `string`)*
+- [**`source_code_hash`**](#var-source_code_hash): *(Optional `string`)*<a name="var-source_code_hash"></a>
 
-  Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the
-  package file specified with either `filename` or `s3_key`.
-  Default is `null`.
+  Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either `filename` or `s3_key`.
 
-- **`environment_variables`**: *(Optional `map(string)`)*
+- [**`environment_variables`**](#var-environment_variables): *(Optional `map(string)`)*<a name="var-environment_variables"></a>
 
   A map of environment variables to pass to the Lambda function.
-  AWS will automatically encrypt these with KMS if a key is provided and decrypt
-  them when running the function. Default is `{}`.
+AWS will automatically encrypt these with KMS if a key is provided and decrypt them when running the function.
 
-- **`kms_key_arn`**: *(Optional `string`)*
+  Default is `{}`.
 
-  The ARN for the KMS encryption key that is used to encrypt environment
-  variables. If none is provided when environment variables are in use,
-  AWS Lambda uses a default service key. Default is `null`.
+- [**`kms_key_arn`**](#var-kms_key_arn): *(Optional `string`)*<a name="var-kms_key_arn"></a>
 
-- **`filename`**: *(Optional `string`)*
+  The ARN for the KMS encryption key that is used to encrypt environment variables. If none is provided when environment variables are in use, AWS Lambda uses a default service key.
+
+- [**`filename`**](#var-filename): *(Optional `string`)*<a name="var-filename"></a>
 
   The path to the local .zip file that contains the Lambda function source code.
-  Default is `null`.
 
-- **`timeout`**: *(Optional `number`)*
+- [**`timeout`**](#var-timeout): *(Optional `number`)*<a name="var-timeout"></a>
 
-  The amount of time the Lambda function has to run in seconds. For details see
-  https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
-  Default is `true`.
+  The amount of time the Lambda function has to run in seconds. For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
 
-- **`dead_letter_config_target_arn`**: *(Optional `string`)*
+  Default is `3`.
+
+- [**`dead_letter_config_target_arn`**](#var-dead_letter_config_target_arn): *(Optional `string`)*<a name="var-dead_letter_config_target_arn"></a>
 
   The ARN of an SNS topic or SQS queue to notify when an invocation fails.
-  If this option is used, the function's IAM role must be granted suitable
-  access to write to the target object, which means allowing either the
-  'sns:Publish' or 'sqs:SendMessage' action on this ARN, depending on which
-  service is targeted. Default is `null`.
+If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the 'sns:Publish' or 'sqs:SendMessage' action on this ARN, depending on which service is targeted.
 
-- **`s3_key`**: *(Optional `string`)*
+- [**`s3_key`**](#var-s3_key): *(Optional `string`)*<a name="var-s3_key"></a>
 
   The S3 key of an object containing the function's deployment package.
-  Conflicts with `filename`. Default is `null`.
+Conflicts with `filename`.
 
-- **`s3_object_version`**: *(Optional `string`)*
+- [**`s3_object_version`**](#var-s3_object_version): *(Optional `string`)*<a name="var-s3_object_version"></a>
 
   The object version containing the function's deployment package.
-  Conflicts with `filename`. Default is `null`.
+Conflicts with `filename`.
 
-- **`vpc_security_group_ids`**: *(Optional `set(string)`)*
+- [**`vpc_security_group_ids`**](#var-vpc_security_group_ids): *(Optional `set(string)`)*<a name="var-vpc_security_group_ids"></a>
 
   A set of security group IDs associated with the Lambda function.
+
   Default is `[]`.
 
-- **`memory_size`**: *(Optional `number`)*
+- [**`memory_size`**](#var-memory_size): *(Optional `number`)*<a name="var-memory_size"></a>
 
   Amount of memory in MB the Lambda function can use at runtime.
-  For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+
   Default is `128`.
 
-- **[`permissions`](#permission-resource-configuration)**: *(Optional `list(permission))`)*
+- [**`permissions`**](#var-permissions): *(Optional `list(permission))`)*<a name="var-permissions"></a>
 
-  A list of permission objects of external resources (like a CloudWatch Event Rule,
-  SNS, or S3) that should have permission to access the Lambda function.
+  A list of permission objects of external resources (like a CloudWatch Event Rule, SNS, or S3) that should have permission to access the Lambda function.
+
   Default is `[]`.
+
+  Example:
 
   ```hcl
   permissions = [
@@ -257,76 +275,48 @@ See [variables.tf] and [examples/] for details and use-cases.
   ]
   ```
 
-- **`tracing_mode`**: *(Optional `string`)*
+  The object accepts the following attributes:
 
-  Can be either `PassThrough` or `Active`. If set to `PassThrough`, Lambda will
-  only trace the request from an upstream service if it contains a tracing
-  header with `sampled=1`. If set to `Active`, Lambda will respect any tracing
-  header it receives from an upstream service. If no tracing header is received,
-  Lambda will call X-Ray for a tracing decision. Default is `null`.
+  - [**`statement_id`**](#attr-statement_id-permissions): *(**Required** `string`)*<a name="attr-statement_id-permissions"></a>
 
-#### Alias Resource Configuration
+    A unique statement identifier.
 
-- **`description`**: *(Optional `string`)*
+  - [**`action`**](#attr-action-permissions): *(**Required** `string`)*<a name="attr-action-permissions"></a>
 
-  Description of the alias. Default is `""`.
+    The AWS Lambda action you want to allow in this statement. (e.g. `lambda:InvokeFunction`)
 
-- **`function_version`**: *(Optional `string`)*
+  - [**`principal`**](#attr-principal-permissions): *(**Required** `string`)*<a name="attr-principal-permissions"></a>
 
-  Lambda function version for which you are creating the alias.
-  Pattern: `(\$LATEST|[0-9]+)`. Default is `"$LATEST"`.
+    The principal who is getting this permission. e.g. `s3.amazonaws.com`, an AWS account ID, or any valid AWS service principal such as `events.amazonaws.com` or `sns.amazonaws.com`.
 
-- **`additional_version_weights`**: *(Optional `map(string)`)*
+  - [**`event_source_token`**](#attr-event_source_token-permissions): *(Optional `string`)*<a name="attr-event_source_token-permissions"></a>
 
-  A map that defines the proportion of events that should be sent
-  to different versions of a lambda function. Default is `null`.
+    The Event Source Token to validate. Used with Alexa Skills.
 
-#### Permission Resource Configuration
+  - [**`qualifier`**](#attr-qualifier-permissions): *(Optional `string`)*<a name="attr-qualifier-permissions"></a>
 
-- **`statement_id`**: **(Required `string`)**
+    Query parameter to specify function version or alias name.
+    The permission will then apply to the specific qualified ARN. e.g. `arn:aws:lambda:aws-region:acct-id:function:function-name:2`.
 
-  A unique statement identifier.
+  - [**`source_account`**](#attr-source_account-permissions): *(Optional `string`)*<a name="attr-source_account-permissions"></a>
 
-- **`action`**: **(Required `string`)**
+    This parameter is used for S3 and SES.
+    The AWS account ID (without a hyphen) of the source owner.
 
- The AWS Lambda action you want to allow in this statement.
- (e.g. `lambda:InvokeFunction`)
+  - [**`source_arn`**](#attr-source_arn-permissions): *(Optional `string`)*<a name="attr-source_arn-permissions"></a>
 
-- **`principal`**: **(Required `string`)**
+    When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to. Without this, any resource from principal will be granted permission – even if that resource is from another account.
+    For S3, this should be the ARN of the S3 Bucket.
+    For CloudWatch Events, this should be the ARN of the CloudWatch Events Rule.
+    For API Gateway, this should be the ARN of the API, as described in
+    https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html.
 
-  The principal who is getting this permission. e.g. `s3.amazonaws.com`,
-  an AWS account ID, or any valid AWS service principal such as
-  `events.amazonaws.com` or `sns.amazonaws.com`.
+- [**`tracing_mode`**](#var-tracing_mode): *(Optional `string`)*<a name="var-tracing_mode"></a>
 
-- **`action`**: *(Optional `string`)*
+  Can be either `PassThrough` or `Active`. If set to `PassThrough`, Lambda will only trace the request from an upstream service if it contains a tracing header with `sampled=1`. If set to `Active`, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received,
+Lambda will call X-Ray for a tracing decision.
 
-  The Event Source Token to validate. Used with Alexa Skills.
-  Default is `null`.
-
-- **`qualifier`**: *(Optional `string`)*
-
-  Query parameter to specify function version or alias name.
-  The permission will then apply to the specific qualified ARN. e.g.
-  `arn:aws:lambda:aws-region:acct-id:function:function-name:2`.
-  Default is `null`.
-
-- **`source_account`**: *(Optional `string`)*
-
-  This parameter is used for S3 and SES.
-  The AWS account ID (without a hyphen) of the source owner.
-  Default is `null`.
-
-- **`source_arn`**: *(Optional `string`)*
-
-  When the principal is an AWS service, the ARN of the specific resource within
-  that service to grant permission to. Without this, any resource from principal
-  will be granted permission – even if that resource is from another account.
-  For S3, this should be the ARN of the S3 Bucket.
-  For CloudWatch Events, this should be the ARN of the CloudWatch Events Rule.
-  For API Gateway, this should be the ARN of the API, as described in
-  https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html.
-
-## Module Attributes Reference
+## Module Outputs
 
 The following attributes are exported by the module:
 
@@ -351,22 +341,23 @@ The following attributes are exported by the module:
   A map of all module arguments. Omitted optional arguments will be represented with their actual defaults.
 
 - **`module_tags`**
-
+      
   A map of tags that will be applied to all created resources that accept tags.
   Tags defined with `module_tags` can be overwritten by resource-specific tags.
-  Default is `true`.
 
 ## External Documentation
 
-- AWS Lambda Documentation:
-  - General Documentation: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
-  - Functions: https://docs.aws.amazon.com/lambda/latest/dg/lambda-functions.html
-  - Aliases: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
+### AWS Lambda Documentation
 
-- Terraform AWS Provider Documentation:
-  - https://www.terraform.io/docs/providers/aws/r/lambda_function.html
-  - https://www.terraform.io/docs/providers/aws/r/lambda_alias.html
-  - https://www.terraform.io/docs/providers/aws/r/lambda_permission.html
+- General Documentation: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+- Functions: https://docs.aws.amazon.com/lambda/latest/dg/lambda-functions.html
+- Aliases: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
+
+### Terraform AWS Provider Documentation
+
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_alias
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission
 
 ## Module Versioning
 
@@ -399,47 +390,40 @@ if you have any questions or need help. Feel free to email us at [hello@mineiros
 
 We use GitHub [Issues] to track community reported issues and missing features.
 
-## Contributing
-
-Contributions are always encouraged and welcome! For the process of accepting changes, we use
-[Pull Requests]. If you'd like more information, please see our [Contribution Guidelines].
-
 ## Makefile Targets
 
 This repository comes with a handy [Makefile].
 Run `make help` to see details on each available target.
 
-## License
+# License
+
+[![license][badge-license]][apache20]
 
 This module is licensed under the Apache License Version 2.0, January 2004.
 Please see [LICENSE] for full details.
+    
+Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 
-Copyright &copy; 2020 [Mineiros GmbH][homepage]
 
 <!-- References -->
 
 [homepage]: https://mineiros.io/?ref=terraform-aws-lambda-function
 [hello@mineiros.io]: mailto:hello@mineiros.io
-
 [badge-build]: https://github.com/mineiros-io/terraform-aws-lambda-function/workflows/CI/CD%20Pipeline/badge.svg
 [badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-aws-lambda-function.svg?label=latest&sort=semver
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
 [badge-terraform]: https://img.shields.io/badge/terraform-1.x%20|%200.15%20|%200.14%20|%200.13%20|%200.12.20+-623CE4.svg?logo=terraform
 [badge-slack]: https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack
-
 [build-status]: https://github.com/mineiros-io/terraform-aws-lambda-function/actions
 [releases-github]: https://github.com/mineiros-io/terraform-aws-lambda-function/releases
 [releases-terraform]: https://github.com/hashicorp/terraform/releases
 [apache20]: https://opensource.org/licenses/Apache-2.0
 [slack]: https://join.slack.com/t/mineiros-community/shared_invite/zt-ehidestg-aLGoIENLVs6tvwJ11w9WGg
-
 [Terraform]: https://www.terraform.io
 [AWS]: https://aws.amazon.com/
 [Serverless Lambda Functions]: https://aws.amazon.com/lambda/
 [Semantic Versioning (SemVer)]: https://semver.org/
-
 [terraform-aws-iam-role]: https://github.com/mineiros-io/terraform-aws-iam-role
-
 [examples/s3-complete-example/main.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples/s3-complete-example/main.tf
 [variables.tf]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/variables.tf
 [examples/]: https://github.com/mineiros-io/terraform-aws-lambda-function/blob/master/examples
