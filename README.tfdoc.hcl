@@ -125,8 +125,7 @@ section {
         }
 
         variable "module_depends_on" {
-          type        = any
-          readme_type = "list(dependencies)"
+          type        = list(dependencies)
           description = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
           END
@@ -169,9 +168,8 @@ section {
         }
 
         variable "aliases" {
-          type           = any
+          type           = map(alias)
           default        = {}
-          readme_type    = "map(name => alias))"
           description    = <<-END
             A map of aliases (keyed by the alias name) that will be created for the Lambda function. If `version` is omitted, the alias will automatically point to `$LATEST`.
           END
@@ -353,8 +351,7 @@ section {
         }
 
         variable "permissions" {
-          type           = any
-          readme_type    = "list(permission))"
+          type           = list(permission)
           default        = []
           description    = <<-END
             A list of permission objects of external resources (like a CloudWatch Event Rule, SNS, or S3) that should have permission to access the Lambda function.
@@ -443,32 +440,52 @@ section {
     title   = "Module Outputs"
     content = <<-END
       The following attributes are exported by the module:
-
-      - **`function`**
-
-        All outputs of the `aws_lambda_function` resource."
-
-      - **`aliases`**
-
-        A map of all created `aws_lambda_alias` resources keyed by name.
-
-      - **`permissions`**
-
-        A map of all created `aws_lambda_permission` resources keyed by `statement_id`.
-
-      - **`module_enabled`**
-
-        Whether this module is enabled.
-
-      - **`module_inputs`**
-
-        A map of all module arguments. Omitted optional arguments will be represented with their actual defaults.
-
-      - **`module_tags`**
-      
-        A map of tags that will be applied to all created resources that accept tags.
-        Tags defined with `module_tags` can be overwritten by resource-specific tags.
     END
+
+    output "function" {
+      type        = object(function)
+      description = <<-END
+        All outputs of the `aws_lambda_function` resource."
+      END
+    }
+
+    output "aliases" {
+      type        = map(alias)
+      description = <<-END
+        A map of all created `aws_lambda_alias` resources keyed by name.
+      END
+    }
+
+    output "permissions" {
+      type        = list(permission)
+      description = <<-END
+        A map of all created `aws_lambda_permission` resources keyed by
+        `statement_id`.
+      END
+    }
+
+    output "module_enabled" {
+      type        = bool
+      description = <<-END
+        Whether this module is enabled.
+      END
+    }
+
+    output "module_inputs" {
+      type        = map(module_inputs)
+      description = <<-END
+        A map of all module arguments. Omitted optional arguments will be
+        represented with their actual defaults.
+      END
+    }
+
+    output "module_tags" {
+      type        = map(string)
+      description = <<-END
+        The map of tags that are being applied to all created resources that
+        accept tags.
+      END
+    }
   }
 
   section {

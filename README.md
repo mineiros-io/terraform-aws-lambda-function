@@ -32,6 +32,7 @@ secure, and production-grade cloud infrastructure.
 - [About Mineiros](#about-mineiros)
 - [Reporting Issues](#reporting-issues)
 - [Makefile Targets](#makefile-targets)
+- [License](#license)
 
 ## Module Features
 
@@ -93,7 +94,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 - [**`module_tags`**](#var-module_tags): *(Optional `map(string)`)*<a name="var-module_tags"></a>
 
   A map of tags that will be applied to all created resources that accept tags.
-Tags defined with 'module_tags' can be overwritten by resource-specific tags.
+  Tags defined with 'module_tags' can be overwritten by resource-specific tags.
 
   Default is `{}`.
 
@@ -121,7 +122,7 @@ Tags defined with 'module_tags' can be overwritten by resource-specific tags.
 
   Default is `"[]"`.
 
-- [**`aliases`**](#var-aliases): *(Optional `map(name => alias))`)*<a name="var-aliases"></a>
+- [**`aliases`**](#var-aliases): *(Optional `map(alias)`)*<a name="var-aliases"></a>
 
   A map of aliases (keyed by the alias name) that will be created for the Lambda function. If `version` is omitted, the alias will automatically point to `$LATEST`.
 
@@ -144,20 +145,20 @@ Tags defined with 'module_tags' can be overwritten by resource-specific tags.
   }
   ```
 
-  The object accepts the following attributes:
+  Each `alias` object in the map accepts the following attributes:
 
-  - [**`description`**](#attr-description-aliases): *(Optional `string`)*<a name="attr-description-aliases"></a>
+  - [**`description`**](#attr-aliases-description): *(Optional `string`)*<a name="attr-aliases-description"></a>
 
     Description of the alias.
 
-  - [**`function_version`**](#attr-function_version-aliases): *(Optional `string`)*<a name="attr-function_version-aliases"></a>
+  - [**`function_version`**](#attr-aliases-function_version): *(Optional `string`)*<a name="attr-aliases-function_version"></a>
 
     Lambda function version for which you are creating the alias.
     Pattern: `(\$LATEST|[0-9]+)`.
 
     Default is `"$LATEST"`.
 
-  - [**`additional_version_weights`**](#attr-additional_version_weights-aliases): *(Optional `map(string)`)*<a name="attr-additional_version_weights-aliases"></a>
+  - [**`additional_version_weights`**](#attr-aliases-additional_version_weights): *(Optional `map(string)`)*<a name="attr-aliases-additional_version_weights"></a>
 
     A map that defines the proportion of events that should be sent to different versions of a lambda function.
 
@@ -168,7 +169,7 @@ Tags defined with 'module_tags' can be overwritten by resource-specific tags.
 - [**`publish`**](#var-publish): *(Optional `bool`)*<a name="var-publish"></a>
 
   Whether to publish creation/change as new Lambda function.
-This allows you to use aliases to refer to execute different versions of the function in different environments.
+  This allows you to use aliases to refer to execute different versions of the function in different environments.
 
   Default is `false`.
 
@@ -187,22 +188,22 @@ This allows you to use aliases to refer to execute different versions of the fun
 - [**`layer_arns`**](#var-layer_arns): *(Optional `set(string)`)*<a name="var-layer_arns"></a>
 
   Set of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda function.
-For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+  For details see https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 
   Default is `[]`.
 
 - [**`reserved_concurrent_executions`**](#var-reserved_concurrent_executions): *(Optional `number`)*<a name="var-reserved_concurrent_executions"></a>
 
   The amount of reserved concurrent executions for this Lambda function.
-A value of 0 disables Lambda from being triggered and -1 removes any concurrency limitations.
-For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
+  A value of 0 disables Lambda from being triggered and -1 removes any concurrency limitations.
+  For details see https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
 
   Default is `-1`.
 
 - [**`s3_bucket`**](#var-s3_bucket): *(Optional `string`)*<a name="var-s3_bucket"></a>
 
   The S3 bucket location containing the function's deployment package.
-Conflicts with `filename`. This bucket must reside in the same AWS region where you are creating the Lambda function.
+  Conflicts with `filename`. This bucket must reside in the same AWS region where you are creating the Lambda function.
 
 - [**`source_code_hash`**](#var-source_code_hash): *(Optional `string`)*<a name="var-source_code_hash"></a>
 
@@ -211,7 +212,7 @@ Conflicts with `filename`. This bucket must reside in the same AWS region where 
 - [**`environment_variables`**](#var-environment_variables): *(Optional `map(string)`)*<a name="var-environment_variables"></a>
 
   A map of environment variables to pass to the Lambda function.
-AWS will automatically encrypt these with KMS if a key is provided and decrypt them when running the function.
+  AWS will automatically encrypt these with KMS if a key is provided and decrypt them when running the function.
 
   Default is `{}`.
 
@@ -232,17 +233,17 @@ AWS will automatically encrypt these with KMS if a key is provided and decrypt t
 - [**`dead_letter_config_target_arn`**](#var-dead_letter_config_target_arn): *(Optional `string`)*<a name="var-dead_letter_config_target_arn"></a>
 
   The ARN of an SNS topic or SQS queue to notify when an invocation fails.
-If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the 'sns:Publish' or 'sqs:SendMessage' action on this ARN, depending on which service is targeted.
+  If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the 'sns:Publish' or 'sqs:SendMessage' action on this ARN, depending on which service is targeted.
 
 - [**`s3_key`**](#var-s3_key): *(Optional `string`)*<a name="var-s3_key"></a>
 
   The S3 key of an object containing the function's deployment package.
-Conflicts with `filename`.
+  Conflicts with `filename`.
 
 - [**`s3_object_version`**](#var-s3_object_version): *(Optional `string`)*<a name="var-s3_object_version"></a>
 
   The object version containing the function's deployment package.
-Conflicts with `filename`.
+  Conflicts with `filename`.
 
 - [**`vpc_security_group_ids`**](#var-vpc_security_group_ids): *(Optional `set(string)`)*<a name="var-vpc_security_group_ids"></a>
 
@@ -253,11 +254,11 @@ Conflicts with `filename`.
 - [**`memory_size`**](#var-memory_size): *(Optional `number`)*<a name="var-memory_size"></a>
 
   Amount of memory in MB the Lambda function can use at runtime.
-For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+  For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
 
   Default is `128`.
 
-- [**`permissions`**](#var-permissions): *(Optional `list(permission))`)*<a name="var-permissions"></a>
+- [**`permissions`**](#var-permissions): *(Optional `list(permission)`)*<a name="var-permissions"></a>
 
   A list of permission objects of external resources (like a CloudWatch Event Rule, SNS, or S3) that should have permission to access the Lambda function.
 
@@ -275,35 +276,35 @@ For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limi
   ]
   ```
 
-  The object accepts the following attributes:
+  Each `permission` object in the list accepts the following attributes:
 
-  - [**`statement_id`**](#attr-statement_id-permissions): *(**Required** `string`)*<a name="attr-statement_id-permissions"></a>
+  - [**`statement_id`**](#attr-permissions-statement_id): *(**Required** `string`)*<a name="attr-permissions-statement_id"></a>
 
     A unique statement identifier.
 
-  - [**`action`**](#attr-action-permissions): *(**Required** `string`)*<a name="attr-action-permissions"></a>
+  - [**`action`**](#attr-permissions-action): *(**Required** `string`)*<a name="attr-permissions-action"></a>
 
     The AWS Lambda action you want to allow in this statement. (e.g. `lambda:InvokeFunction`)
 
-  - [**`principal`**](#attr-principal-permissions): *(**Required** `string`)*<a name="attr-principal-permissions"></a>
+  - [**`principal`**](#attr-permissions-principal): *(**Required** `string`)*<a name="attr-permissions-principal"></a>
 
     The principal who is getting this permission. e.g. `s3.amazonaws.com`, an AWS account ID, or any valid AWS service principal such as `events.amazonaws.com` or `sns.amazonaws.com`.
 
-  - [**`event_source_token`**](#attr-event_source_token-permissions): *(Optional `string`)*<a name="attr-event_source_token-permissions"></a>
+  - [**`event_source_token`**](#attr-permissions-event_source_token): *(Optional `string`)*<a name="attr-permissions-event_source_token"></a>
 
     The Event Source Token to validate. Used with Alexa Skills.
 
-  - [**`qualifier`**](#attr-qualifier-permissions): *(Optional `string`)*<a name="attr-qualifier-permissions"></a>
+  - [**`qualifier`**](#attr-permissions-qualifier): *(Optional `string`)*<a name="attr-permissions-qualifier"></a>
 
     Query parameter to specify function version or alias name.
     The permission will then apply to the specific qualified ARN. e.g. `arn:aws:lambda:aws-region:acct-id:function:function-name:2`.
 
-  - [**`source_account`**](#attr-source_account-permissions): *(Optional `string`)*<a name="attr-source_account-permissions"></a>
+  - [**`source_account`**](#attr-permissions-source_account): *(Optional `string`)*<a name="attr-permissions-source_account"></a>
 
     This parameter is used for S3 and SES.
     The AWS account ID (without a hyphen) of the source owner.
 
-  - [**`source_arn`**](#attr-source_arn-permissions): *(Optional `string`)*<a name="attr-source_arn-permissions"></a>
+  - [**`source_arn`**](#attr-permissions-source_arn): *(Optional `string`)*<a name="attr-permissions-source_arn"></a>
 
     When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to. Without this, any resource from principal will be granted permission – even if that resource is from another account.
     For S3, this should be the ARN of the S3 Bucket.
@@ -314,36 +315,38 @@ For details see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limi
 - [**`tracing_mode`**](#var-tracing_mode): *(Optional `string`)*<a name="var-tracing_mode"></a>
 
   Can be either `PassThrough` or `Active`. If set to `PassThrough`, Lambda will only trace the request from an upstream service if it contains a tracing header with `sampled=1`. If set to `Active`, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received,
-Lambda will call X-Ray for a tracing decision.
+  Lambda will call X-Ray for a tracing decision.
 
 ## Module Outputs
 
 The following attributes are exported by the module:
 
-- **`function`**
+- [**`function`**](#output-function): *(`object(function)`)*<a name="output-function"></a>
 
   All outputs of the `aws_lambda_function` resource."
 
-- **`aliases`**
+- [**`aliases`**](#output-aliases): *(`map(alias)`)*<a name="output-aliases"></a>
 
   A map of all created `aws_lambda_alias` resources keyed by name.
 
-- **`permissions`**
+- [**`permissions`**](#output-permissions): *(`list(permission)`)*<a name="output-permissions"></a>
 
-  A map of all created `aws_lambda_permission` resources keyed by `statement_id`.
+  A map of all created `aws_lambda_permission` resources keyed by
+  `statement_id`.
 
-- **`module_enabled`**
+- [**`module_enabled`**](#output-module_enabled): *(`bool`)*<a name="output-module_enabled"></a>
 
   Whether this module is enabled.
 
-- **`module_inputs`**
+- [**`module_inputs`**](#output-module_inputs): *(`map(module_inputs)`)*<a name="output-module_inputs"></a>
 
-  A map of all module arguments. Omitted optional arguments will be represented with their actual defaults.
+  A map of all module arguments. Omitted optional arguments will be
+  represented with their actual defaults.
 
-- **`module_tags`**
-      
-  A map of tags that will be applied to all created resources that accept tags.
-  Tags defined with `module_tags` can be overwritten by resource-specific tags.
+- [**`module_tags`**](#output-module_tags): *(`map(string)`)*<a name="output-module_tags"></a>
+
+  The map of tags that are being applied to all created resources that
+  accept tags.
 
 ## External Documentation
 
@@ -395,13 +398,13 @@ We use GitHub [Issues] to track community reported issues and missing features.
 This repository comes with a handy [Makefile].
 Run `make help` to see details on each available target.
 
-# License
+## License
 
 [![license][badge-license]][apache20]
 
 This module is licensed under the Apache License Version 2.0, January 2004.
 Please see [LICENSE] for full details.
-    
+      
 Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 
 
